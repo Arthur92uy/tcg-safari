@@ -85,6 +85,28 @@ function registrarUsuario(nombre, apellido, email, nickname, contraseña, fechaN
 }
 
 
+function iniciarSesion(email, msgmail, pass, msgpass){
+    const usuarios = JSON.parse(localStorage.getItem('usuarios')) || []
+    const usuarioEncontrado = usuarios.find(u => u.email === email.value.trim().toLowerCase());
+    if(!usuarioEncontrado) {
+        email.style.border='1px solid red';
+        msgmail.innerText = `No existe una cuenta asociada a ese Email.`;
+        msgmail.style.visibility = "visible";
+        return false;
+    }
+    if(usuarioEncontrado.contraseña === pass.value.trim()){
+        sessionStorage.setItem('usuarioActivo', JSON.stringify(usuarioEncontrado))
+        alert(`Bienvenido ${usuarioEncontrado.nickname}.`)
+        return true;
+    } else {
+        pass.style.border='1px solid red';
+        msgpass.innerText = `La contraseña ingresada es incorrecta.`;
+        msgpass.style.visibility = "visible";
+        return false;
+    }
+}
+
+
 
 document.addEventListener("DOMContentLoaded", function () {
     const usuarioActivo = JSON.parse(sessionStorage.getItem('usuarioActivo')) || []
@@ -135,24 +157,17 @@ document.addEventListener("DOMContentLoaded", function () {
     if (inputEmailLogin && inputPassLogin && buttonLogin && buttonClear) {
         buttonLogin.addEventListener("click", (e) => {
             e.preventDefault()
-            if((validarEmail(inputEmailLogin, spanEmailLogin, 7, 50)) && (validarPassword(inputPassLogin, spanPassLogin, 8, 16))){
+            if((validarEmail(inputEmailLogin, spanEmailLogin, 7, 50))){
                 inputEmailLogin.style.border='0.5px solid rgba(0, 0, 0, 0.3)';
-                inputPassLogin.style.border='0.5px solid rgba(0, 0, 0, 0.3)';
                 spanEmailLogin.innerText = "";
                 spanEmailLogin.style.visibility = "hidden";
-                spanPassLogin.innerText = "";
-                spanPassLogin.style.visibility = "hidden";
-
-
-                //Login pendiente de convertir en funcion 
-                const usuarios = JSON.parse(localStorage.getItem('usuarios')) || []
-                const usuarioEncontrado = usuarios.find(u =>
-                    u.email === inputEmailLogin.value.trim().toLowerCase() && u.contraseña === inputPassLogin.value.trim()
-                );
-                if(usuarioEncontrado) {
-                    sessionStorage.setItem('usuarioActivo', JSON.stringify(usuarioEncontrado))
-                    alert(`Bienvenido ${usuarioEncontrado.nickname}.`)
-                    window.location.href = "../index.html";
+                if(validarPassword(inputPassLogin, spanPassLogin, 8, 16)){
+                    inputPassLogin.style.border='0.5px solid rgba(0, 0, 0, 0.3)';
+                    spanPassLogin.innerText = "";
+                    spanPassLogin.style.visibility = "hidden";
+                    if(iniciarSesion(inputEmailLogin, spanEmailLogin, inputPassLogin, spanPassLogin)) {
+                        window.location.href = "../index.html";
+                    }
                 }
             }
         })
