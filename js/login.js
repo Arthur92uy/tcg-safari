@@ -54,18 +54,9 @@ function cambiarForm() {
         if (el.classList.contains('active')) {
             el.classList.remove("active");
             el.classList.add("inactive");
-            // el.style.opacity = "1";
-            // requestAnimationFrame(() => {
-            //     el.style.opacity = "0";
-            // });
-
         } else if (el.classList.contains('inactive')) {
             el.classList.remove("inactive");
             el.classList.add("active");
-            // el.style.opacity = "0";
-            // requestAnimationFrame(() => {
-            //     el.style.opacity = "1";
-            // });
         }
     });
     return true;
@@ -88,16 +79,20 @@ function registrarUsuario(nombre, apellido, email, nickname, contraseña, fechaN
     };
 
     let usuarios = JSON.parse(localStorage.getItem('usuarios')) || [];
-    if(usuarios.push(nuevoUsuario)) {
-        alert(`Usuario registrado con exito.`)
-    }
-
+    usuarios.push(nuevoUsuario)
     localStorage.setItem('usuarios', JSON.stringify(usuarios));
+    alert(`Usuario registrado con exito.`)
 }
 
 
 
 document.addEventListener("DOMContentLoaded", function () {
+    const usuarioActivo = JSON.parse(sessionStorage.getItem('usuarioActivo')) || []
+    const spanUsuarioActivo = document.querySelector(".header__avatar a span");
+    if(usuarioActivo && usuarioActivo.nickname){
+        spanUsuarioActivo.innerText = usuarioActivo.nickname
+    }
+
     const h2TituloSignUp = document.querySelector("h2.auth__container__title--sign-up");
     const h3TituloRegister = document.querySelector("h3.auth__container__title--register");
     const buttonRegistrate = document.querySelector(".auth__button--register");
@@ -147,7 +142,18 @@ document.addEventListener("DOMContentLoaded", function () {
                 spanEmailLogin.style.visibility = "hidden";
                 spanPassLogin.innerText = "";
                 spanPassLogin.style.visibility = "hidden";
-                alert(`Vamos a validar el usuario`);
+
+
+                //Login pendiente de convertir en funcion 
+                const usuarios = JSON.parse(localStorage.getItem('usuarios')) || []
+                const usuarioEncontrado = usuarios.find(u =>
+                    u.email === inputEmailLogin.value.trim().toLowerCase() && u.contraseña === inputPassLogin.value.trim()
+                );
+                if(usuarioEncontrado) {
+                    sessionStorage.setItem('usuarioActivo', JSON.stringify(usuarioEncontrado))
+                    alert(`Bienvenido ${usuarioEncontrado.nickname}.`)
+                    window.location.href = "../index.html";
+                }
             }
         })
     }
