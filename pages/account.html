@@ -70,7 +70,9 @@
                     <p class="hero__subtitle">
                         Captura nuevas cartas raras, intercambia con otros entrenadores y luce tu pokedex
                     </p>
-                    <a href="#explorar" class="hero__cta">Explorar cartas</a>
+                    <a href="#explorar" class="hero__cta">
+                        Explorar cartas
+                    </a>
                 </div>
                 <div class="hero__image">
                     <img src="../resources/images/hero/img-hero-199.png" alt="" class="hero__img">
@@ -92,25 +94,14 @@
                     <button type="button" class="auth__button auth__button--register active">Registrate</button>
                     <form class="auth__form auth__form--sign-up inactive" action="#" method="get">
                         <input type="text" minlength="3" maxlength="35" title="Debe contener entre 3 y 35 caracteres entre la A y la Z." pattern="[A-Za-zÁÉÍÓÚáéíóúÑñ\s]+" inputmode="text" placeholder="Nombre" class="auth__form__input auth__form__input--nombre-sign-up" required>
-
                         <input type="text" minlength="3" maxlength="35" title="Debe contener entre 3 y 35 caracteres entre la A y la Z." pattern="[A-Za-zÁÉÍÓÚáéíóúÑñ\s]+" inputmode="text" placeholder="Apellido" class="auth__form__input auth__form__input--apellido-sign-up" required>
-
-                        <span class="msgNombreCompletoSignUp"></span>
-
                         <input type="email" minlength="7" maxlength="50" pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}" title="Debe contener entre 7 y 50 caracteres con un formto valido, ejemplo: hola@tcgsafari.com." inputmode="text" placeholder="Email" class="auth__form__input auth__form__input--email-sign-up" required>
-
                         <span class="msgEmailSignUp"></span>
-
                         <input type="text" minlength="6" maxlength="20" pattern="^[a-zA-Z0-9._]{3,16}$" title="Debe contener entre 3 y 16 caracteres: letras, números, guión bajo y punto" inputmode="text" placeholder="Nickname" class="auth__form__input auth__form__input--user-sign-up" required>
-
-                        <span class="msgUserSignUp"></span>
-
                         <input type="password" minlength="8" maxlength="16" inputmode="text" placeholder="Contraseña"  pattern="(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,16}" title="Debe tener entre 8 y 16 caracteres, incluyendo una letra, un número y un símbolo" required class="auth__form__input auth__form__input--password-sign-up">
-
                         <span class="msgPassSignUp"></span>
-
                         <input type="date" inputmode="numeric" value="" min="1925-01-01" max="2013-07-06" required class="auth__form__input auth__form__input--fechaNac-sign-up" title="Fecha de nacimiento" required>
-
+                        <input type="text" inputmode="text" placeholder="Calle y número de puerta" class="auth__form__input auth__form__input--direccion-sign-up" required>
                         <select name="departamento" required class="auth__form__input auth__form__input__select--departamento-sign-up" title="Departamento">
                             <option value="" disabled selected>--Departamento--</option>
                             <option value="Artigas">Artigas</option>
@@ -133,11 +124,6 @@
                             <option value="Tacuarembó">Tacuarembó</option>
                             <option value="Treinta y Tres">Treinta y Tres</option>
                         </select>
-
-                        <span class="msgFNacDeptoSignUp"></span>
-
-                        <input type="text" inputmode="text" placeholder="Calle y número de puerta" class="auth__form__input auth__form__input--direccion-sign-up" required>
-
                         <div class="auth__form__input__tyc">
                             <input type="checkbox" id="tyc" name="tyc" title="Debe aceptar los Terminos y Condiciones para registrarse." required class="auth__tyc__box">
                             <label for="tyc" class="auth__tyc__label">

@@ -62,13 +62,13 @@ function cambiarForm() {
     return true;
 }
 
-function registrarUsuario(nombre, apellido, email, nickname, contraseña, fechaNac, departamento, direccion) {
+function registrarUsuario(form, nombre, apellido, email, spanEmail, nickname, spanNickname, contraseña, fechaNac, departamento, direccion) {
     const nuevoUsuario = {
     nombre: nombre.value.trim(),
     apellido: apellido.value.trim(),
     email: email.value.trim().toLowerCase(),
     nickname: nickname.value.trim(),
-    contraseña: contraseña.value.trim(),
+    password: contraseña.value.trim(),
     fechaNac: fechaNac.value,
     departamento: departamento.value.trim(),
     direccion: direccion.value,
@@ -79,9 +79,27 @@ function registrarUsuario(nombre, apellido, email, nickname, contraseña, fechaN
     };
 
     let usuarios = JSON.parse(localStorage.getItem('usuarios')) || [];
-    usuarios.push(nuevoUsuario)
-    localStorage.setItem('usuarios', JSON.stringify(usuarios));
-    alert(`Usuario registrado con exito.`)
+    const existeEmail = usuarios.some(u => u.email === nuevoUsuario.email);
+    const existeNickname = usuarios.some(u => u.nickname === nuevoUsuario.nickname);
+    if (existeEmail || existeNickname) {
+        if (existeEmail) {
+        email.style.border='1px solid red';
+        spanEmail.innerText = `Ya existe una cuenta asociada a ese Email.`;
+        spanEmail.style.visibility = "visible";
+        }
+        if (existeNickname) {
+            nickname.style.border='1px solid red';
+            spanNickname.innerText = `Ya existe una cuenta asociada a ese Nickname.`;
+            spanNickname.style.visibility = "visible";
+            
+        }
+        return false
+    } else {
+        usuarios.push(nuevoUsuario)
+        localStorage.setItem('usuarios', JSON.stringify(usuarios));
+        form.reset()
+        return true
+    }
 }
 
 
@@ -94,9 +112,15 @@ function iniciarSesion(email, msgmail, pass, msgpass){
         msgmail.style.visibility = "visible";
         return false;
     }
-    if(usuarioEncontrado.contraseña === pass.value.trim()){
+    if(usuarioEncontrado.password === pass.value.trim()){
         sessionStorage.setItem('usuarioActivo', JSON.stringify(usuarioEncontrado))
         alert(`Bienvenido ${usuarioEncontrado.nickname}.`)
+        email.style.border='0.5px solid rgba(0, 0, 0, 0.3)';
+        msgmail.innerText = "";
+        msgmail.style.visibility = "hidden";
+        pass.style.border='0.5px solid rgba(0, 0, 0, 0.3)';
+        msgpass.innerText = "";
+        msgpass.style.visibility = "hidden";
         return true;
     } else {
         pass.style.border='1px solid red';
@@ -111,8 +135,12 @@ function iniciarSesion(email, msgmail, pass, msgpass){
 document.addEventListener("DOMContentLoaded", function () {
     const usuarioActivo = JSON.parse(sessionStorage.getItem('usuarioActivo')) || []
     const spanUsuarioActivo = document.querySelector(".header__avatar a span");
+    const linkUsuarioActivo = document.querySelector(".header__avatar a")
+    
     if(usuarioActivo && usuarioActivo.nickname){
         spanUsuarioActivo.innerText = usuarioActivo.nickname
+        //CAMBIAR AL SUBR A SERVIDOR
+        linkUsuarioActivo.href = `${window.location.pathname.includes('/pages/') ? './account.html' : './pages/account.html'}`;
     }
 
     const h2TituloSignUp = document.querySelector("h2.auth__container__title--sign-up");
@@ -173,20 +201,15 @@ document.addEventListener("DOMContentLoaded", function () {
         })
     }
 
-    const spanEmailSingUp = document.querySelector(".msgEmailSigmUp");
-    const spanPassSingUp = document.querySelector(".msgPassSigmUp"); 
+    const spanEmailSingUp = document.querySelector(".msgEmailSignUp");
+    const spanPassSingUp = document.querySelector(".msgPassSignUp");
+    const spanUserSignUp = document.querySelector(".msgUserSignUp")
 
     if (inputEmail && inputPass && buttonSignUp && buttonSignUpClear) {
         buttonSignUp.addEventListener("click", (e) => {
             e.preventDefault()
             if((validarEmail(inputEmail,spanEmailSingUp, 7, 50)) && (validarPassword(inputPass, spanPassSingUp, 8, 16))){
-                // inputEmailLogin.style.border='0.5px solid rgba(0, 0, 0, 0.3)';
-                // inputPassLogin.style.border='0.5px solid rgba(0, 0, 0, 0.3)';
-                // spanEmailLogin.innerText = "";
-                // spanEmailLogin.style.visibility = "hidden";
-                // spanPassLogin.innerText = "";
-                // spanPassLogin.style.visibility = "hidden";
-                registrarUsuario(inputNombre, inputApellido, inputEmail, inputUser, inputPass, inputFechaNac, inputDireccion, selectDepartamento)
+                registrarUsuario(formRegister, inputNombre, inputApellido, inputEmail, spanEmailSingUp, inputUser, spanUserSignUp, inputPass, inputFechaNac, inputDireccion, selectDepartamento)
             }
         })
     }    

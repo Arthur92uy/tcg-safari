@@ -261,6 +261,7 @@ img {
     height: 5rem;
     justify-self: center;
     align-self: center;
+    text-align: center;
 }
 
 .hero__cta:hover,
@@ -394,10 +395,10 @@ img {
     grid-area: clear;
 }
 
-.msgUserLogin, .msgPasswordLogin {
+.msgUserLogin, .msgPasswordLogin, .msgEmailSignUp, .msgUserSignUp , .msgPassSignUp, .msgFNacDeptoSignUp, .msgNombreCompletoSignUp {
     visibility: hidden;
     display: block;
-    min-height: 2rem;
+    min-height: 1.5rem;
     width: 100%;
     font-family: 'Inter', sans-serif;
     font-size: 1.1rem;
@@ -408,9 +409,13 @@ img {
 .auth__form--sign-up {
     grid-template-areas:
         'nombre apellido'
+        'sNombreCompleto sNombreCompleto'
         'email email'
+        'semail semail'
         'user password'
+        'suser spassword'
         'fechaNac departamento'
+        'sFNacDepto sFNacDepto'
         'direccion direccion'
         'tyc tyc'
         'submit clear';
@@ -424,12 +429,24 @@ img {
     grid-area: apellido;
 }
 
+.msgNombreCompletoSignUp {
+    grid-area: sNombreCompleto;
+}
+
 .auth__form__input--email-sign-up {
     grid-area: email;
 }
 
+.msgEmailSignUp {
+    grid-area: semail;
+}
+
 .auth__form__input--user-sign-up {
     grid-area: user;
+}
+
+.msgUserSignUp {
+    grid-area: suser;
 }
 
 .auth__form__input--fechaNac-sign-up {
@@ -440,12 +457,20 @@ img {
     grid-area: departamento;
 }
 
+.msgFNacDeptoSignUp {
+    grid-area: sFNacDepto;
+}
+
 .auth__form__input--direccion-sign-up {
     grid-area: direccion;
 }
 
 .auth__form__input--password-sign-up {
     grid-area: password;
+}
+
+.msgPassSignUp {
+    grid-area: spassword;
 }
 
 .auth__form__input__tyc {
@@ -460,7 +485,7 @@ img {
     /* margin-top: 2rem; */
     opacity: 0.8;
     transition: opacity 0.3s ease;
-
+    padding: 0.8rem 0;
 }
 .auth__form__button--submit-sign-up {
     grid-area: submit;
@@ -485,6 +510,7 @@ img {
     width: 100%;
     justify-self: center;
     align-self: center;
+
 }
 
 .auth__form__input--fechaNac-sign-up, .auth__form__input__select--departamento-sign-up {
