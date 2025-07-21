@@ -236,7 +236,11 @@ img {
     max-width: 48rem;
 }
 
-
+.hero__cta {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 
 .hero__cta,
 .search__button,
@@ -245,7 +249,8 @@ img {
 .auth__form__button--submit-sign-up,
 .auth__form__button--clear-sign-up,
 .auth__button--register,
-.auth__button--login {
+.auth__button--login,
+.form__button {
     font-family: 'Inter', sans-serif;
     font-size: 1.4rem;
     background-color: rgba(153, 126, 191, 1);
@@ -271,7 +276,7 @@ img {
 .auth__form__button--submit-sign-up:hover,
 .auth__form__button--clear-sign-up:hover,
 .auth__button--register:hover,
-.auth__button--login:hover {
+.auth__button--login:hover, .form__button:hover {
     background-color: rgba(242, 153, 177, 1);
     color: #fff;
     border: 0.5px solid rgba(51, 51, 51, 0.3);
@@ -290,6 +295,7 @@ img {
     border-radius: 1.3rem;
     border: 1px solid #fff;
 }
+
 
 /* ===== Search Section ===== */
 .search {
@@ -328,7 +334,7 @@ img {
 }
 
 /* ===== Auth Section ===== */
-.auth {
+.auth, .trainer__data {
     display: grid;
     grid-template-columns: 1fr 1fr;
     align-items: flex-start;
@@ -336,7 +342,7 @@ img {
     padding: 4rem 3rem;
 }
 
-.auth__container {
+.auth__container, .trainer__container {
     background-color: rgba(255, 255, 255, 0.5);
     -webkit-backdrop-filter: blur(10px) saturate(180%);
     backdrop-filter: blur(10px) saturate(180%);
@@ -421,11 +427,11 @@ img {
         'submit clear';
 }
 
-.auth__form__input--nombre-sign-up {
+.auth__form__input--nombre-sign-up, .form__input__trainer-nombre {
     grid-area: nombre;
 }
 
-.auth__form__input--apellido-sign-up {
+.auth__form__input--apellido-sign-up, .form__input__trainer-apellido {
     grid-area: apellido;
 }
 
@@ -433,7 +439,7 @@ img {
     grid-area: sNombreCompleto;
 }
 
-.auth__form__input--email-sign-up {
+.auth__form__input--email-sign-up, .form__input__trainer-email {
     grid-area: email;
 }
 
@@ -441,7 +447,7 @@ img {
     grid-area: semail;
 }
 
-.auth__form__input--user-sign-up {
+.auth__form__input--user-sign-up, .form__input__trainer-user {
     grid-area: user;
 }
 
@@ -449,11 +455,11 @@ img {
     grid-area: suser;
 }
 
-.auth__form__input--fechaNac-sign-up {
+.auth__form__input--fechaNac-sign-up, .form__input__trainer-fechaNac {
     grid-area: fechaNac;
 }
 
-.auth__form__input__select--departamento-sign-up {
+.auth__form__input__select--departamento-sign-up, .form__input__trainer-departamento {
     grid-area: departamento;
 }
 
@@ -461,11 +467,11 @@ img {
     grid-area: sFNacDepto;
 }
 
-.auth__form__input--direccion-sign-up {
+.auth__form__input--direccion-sign-up, .form__input__trainer-direccion {
     grid-area: direccion;
 }
 
-.auth__form__input--password-sign-up {
+.auth__form__input--password-sign-up, .form__input__trainer-password {
     grid-area: password;
 }
 
@@ -487,15 +493,15 @@ img {
     transition: opacity 0.3s ease;
     padding: 0.8rem 0;
 }
-.auth__form__button--submit-sign-up {
+.auth__form__button--submit-sign-up, .trainer__button-modificar {
     grid-area: submit;
 }
 
-.auth__form__button--clear-sign-up {
+.auth__form__button--clear-sign-up, .trainer__button-guardar {
     grid-area: clear;
 }
 
-.auth__form__input {
+.auth__form__input, .form__input {
     font-family: 'VT323', monospace;
     font-size: 2rem;
     padding: 0.8rem 1.2rem;
@@ -569,3 +575,37 @@ img {
     position: absolute;
     z-index: 0;
 }
+
+.trainer__data {
+    display: grid;
+    grid-template-columns: 4fr 8fr;
+}
+
+.trainer__container--left {
+    height: 100%;
+}
+
+.trainer__form {
+    display: grid;
+    column-gap: 2.5rem;
+    row-gap: 1rem;
+    padding: 2rem 2.5rem;
+    grid-template-columns: 1fr 1fr;
+    width: 100%;
+    transition: all 0.3s ease;
+}
+
+.trainer__form {
+    grid-template-areas:
+        'nombre apellido'
+        'sNombreCompleto sNombreCompleto'
+        'email email'
+        'semail semail'
+        'user password'
+        'suser spassword'
+        'fechaNac departamento'
+        'sFNacDepto sFNacDepto'
+        'direccion direccion'
+        'submit clear';
+}
+

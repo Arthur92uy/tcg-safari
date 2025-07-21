@@ -97,7 +97,7 @@
 
                         <span class="msgNombreCompletoSignUp"></span>
 
-                        <input type="email" minlength="7" maxlength="50" pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}" title="Debe contener entre 7 y 50 caracteres con un formto valido, ejemplo: hola@tcgsafari.com." inputmode="text" placeholder="Email" class="auth__form__input auth__form__input--email-sign-up" required>
+                        <input type="email" minlength="7" maxlength="50" pattern="[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}" title="Debe contener entre 7 y 50 caracteres con un formto valido, ejemplo: hola@tcgsafari.com." inputmode="text" placeholder="Email" class="auth__form__input auth__form__input--email-sign-up" required>
 
                         <span class="msgEmailSignUp"></span>
 
@@ -154,9 +154,9 @@
                     <h3 class="auth__container__title auth__container__title--login inactive">Si eres un entrenador Pokemón registrado</h3>
                     <button type="button" class="auth__button auth__button--login inactive">Inicia sesión</button>
                     <form class="auth__form auth__form--login active" action="#" method="get">
-                        <input type="email" minlength="7" maxlength="50" pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}" title="Debe contener entre 7 y 50 caracteres con un formto valido, ejemplo: hola@tcgsafari.com." inputmode="text" placeholder="Email" class="auth__form__input auth__form__input--user-login">
+                        <input type="email" minlength="7" maxlength="50" pattern="[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}" title="Debe contener entre 7 y 50 caracteres con un formto valido, ejemplo: hola@tcgsafari.com." inputmode="text" placeholder="Email" class="auth__form__input auth__form__input--user-login">
                         <span class="msgUserLogin"></span>
-                        <input type="password" minlength="8" maxlength="16" inputmode="text" placeholder="Contraseña"  pattern="(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,16}" title="Debe tener entre 8 y 16 caracteres, incluyendo una letra, un número y un símbolo"  class="auth__form__input auth__form__input--password-login">
+                        <input type="password" minlength="8" maxlength="16" inputmode="text" placeholder="Contraseña"  pattern="(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*?&.,])[A-Za-z\d@$!%*?&]{8,16}" title="Debe tener entre 8 y 16 caracteres, incluyendo una letra, un número y un símbolo"  class="auth__form__input auth__form__input--password-login">
                         <span class="msgPasswordLogin"></span>
                         <button type="submit" class="auth__form__button auth__form__button--submit-login">Ingresar</button>
                         <button type="reset" class="auth__form__button auth__form__button--clear-login">Limpiar</button>
@@ -168,6 +168,6 @@
         <footer class="footer section--glass">
         </footer>
     </div>
-    <script src="../js/login.js"></script>
+    <script src="../js/login.js" type="module" defer></script>
 </body>
 </html>

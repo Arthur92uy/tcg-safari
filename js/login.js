@@ -1,53 +1,10 @@
-function validarEmail(input, msg, minimo, maximo) {
-    const value = input.value.trim().toLowerCase() 
-    if (value.length < minimo){
-        input.style.border='1px solid red';
-        msg.innerText = `El email debe tener un minimo de ${minimo} caracteres.`;
-        msg.style.visibility = "visible";
-        return false;
-    }
-    if (value.length > maximo){
-        input.style.border='1px solid red';
-        msg.innerText = `El email debe tener un máximo de ${maximo} caracteres.`;
-        msg.style.visibility = "visible";
-        return false;
-    }
-    if (!value.includes("@") || !value.includes(".")) {
-        input.style.border='1px solid red';
-        msg.innerText = `El email debe contener el simbolo @ y un punto al menos una vez.`;
-        msg.style.visibility = "visible";
-        return false;
-    }
-    input.style.border='1px solid green';
-    msg.innerText = "";
-    msg.style.visibility = "hidden";
-    return true;
-}
+//----------IMPORTS de funciones necesarias en LOGIN.HTML----------//
+import { validarEmail, validarPassword } from "./validations.js";
+import { iniciarSesion } from "./authentication.js";
+import { actualizarAvatarCuenta } from "./app.js";
 
 
-
-function validarPassword(input, msg, minimo, maximo) {
-    const value = input.value.trim()
-        if (value.length < minimo){
-            input.style.border='1px solid red';
-            msg.innerText = `La contraseña debe tener un minimo de ${minimo} caracteres.`;
-            msg.style.visibility = "visible";
-        return false;
-        }
-        if (value.length > maximo){
-            input.style.border='1px solid red';
-            msg.innerText = `La contraseña debe tener un máximo de ${maximo} caracteres.`;
-            msg.style.visibility = "visible";
-        return false;
-        }
-    input.style.border='1px solid green';
-    msg.innerText = "";
-    msg.style.visibility = "hidden";
-    return true;
-}
-
-
-
+//----------Funcion de Switch de Form Registro/Login----------//
 function cambiarForm() {
     const elementosToggables = document.querySelectorAll('.active, .inactive');
     elementosToggables.forEach(el => {
@@ -62,6 +19,8 @@ function cambiarForm() {
     return true;
 }
 
+
+//----------Funcion Registro----------//
 function registrarUsuario(form, nombre, apellido, email, spanEmail, nickname, spanNickname, contraseña, fechaNac, departamento, direccion) {
     const nuevoUsuario = {
     nombre: nombre.value.trim(),
@@ -97,51 +56,22 @@ function registrarUsuario(form, nombre, apellido, email, spanEmail, nickname, sp
     } else {
         usuarios.push(nuevoUsuario)
         localStorage.setItem('usuarios', JSON.stringify(usuarios));
+        email.style.border='0.5px solid rgba(0, 0, 0, 0.3)';
+        nickname.style.border='0.5px solid rgba(0, 0, 0, 0.3)';
+        contraseña.style.border='0.5px solid rgba(0, 0, 0, 0.3)';
+        iniciarSesion(email, spanEmail, contraseña, spanNickname);
         form.reset()
         return true
     }
 }
 
 
-function iniciarSesion(email, msgmail, pass, msgpass){
-    const usuarios = JSON.parse(localStorage.getItem('usuarios')) || []
-    const usuarioEncontrado = usuarios.find(u => u.email === email.value.trim().toLowerCase());
-    if(!usuarioEncontrado) {
-        email.style.border='1px solid red';
-        msgmail.innerText = `No existe una cuenta asociada a ese Email.`;
-        msgmail.style.visibility = "visible";
-        return false;
-    }
-    if(usuarioEncontrado.password === pass.value.trim()){
-        sessionStorage.setItem('usuarioActivo', JSON.stringify(usuarioEncontrado))
-        alert(`Bienvenido ${usuarioEncontrado.nickname}.`)
-        email.style.border='0.5px solid rgba(0, 0, 0, 0.3)';
-        msgmail.innerText = "";
-        msgmail.style.visibility = "hidden";
-        pass.style.border='0.5px solid rgba(0, 0, 0, 0.3)';
-        msgpass.innerText = "";
-        msgpass.style.visibility = "hidden";
-        return true;
-    } else {
-        pass.style.border='1px solid red';
-        msgpass.innerText = `La contraseña ingresada es incorrecta.`;
-        msgpass.style.visibility = "visible";
-        return false;
-    }
-}
 
 
 
 document.addEventListener("DOMContentLoaded", function () {
-    const usuarioActivo = JSON.parse(sessionStorage.getItem('usuarioActivo')) || []
-    const spanUsuarioActivo = document.querySelector(".header__avatar a span");
-    const linkUsuarioActivo = document.querySelector(".header__avatar a")
     
-    if(usuarioActivo && usuarioActivo.nickname){
-        spanUsuarioActivo.innerText = usuarioActivo.nickname
-        //CAMBIAR AL SUBR A SERVIDOR
-        linkUsuarioActivo.href = `${window.location.pathname.includes('/pages/') ? './account.html' : './pages/account.html'}`;
-    }
+    actualizarAvatarCuenta() //----------Se carga nombre del usuario en AVATAR y se adapta ruta de link a account.html
 
     const h2TituloSignUp = document.querySelector("h2.auth__container__title--sign-up");
     const h3TituloRegister = document.querySelector("h3.auth__container__title--register");
@@ -168,19 +98,24 @@ document.addEventListener("DOMContentLoaded", function () {
     const buttonLogin = document.querySelector(".auth__form__button--submit-login");
     const buttonClear = document.querySelector(".auth__form__button--clear-login");
     
+
+    const spanEmailLogin = document.querySelector(".msgUserLogin");
+    const spanPassLogin = document.querySelector(".msgPasswordLogin");
+
+    const spanEmailSingUp = document.querySelector(".msgEmailSignUp");
+    const spanPassSingUp = document.querySelector(".msgPassSignUp");
+    const spanUserSignUp = document.querySelector(".msgUserSignUp");
+
+
+
+
     if ((h2TituloSignUp && h3TituloRegister && buttonRegistrate && formRegister && inputNombre && inputApellido && inputEmail && inputUser && inputPass && inputFechaNac && inputDireccion && selectDepartamento && inputTYC && buttonSignUp &&buttonSignUpClear) && (h2TituloLogin && h3TituloLogin && buttonIniciaSesion && formLogin && inputEmailLogin && inputPassLogin && buttonLogin && buttonClear)){
-        buttonRegistrate.addEventListener("click", () => {
-            (cambiarForm())
-        })
-        buttonIniciaSesion.addEventListener("click", () => {
-            (cambiarForm())
-        })
+        buttonRegistrate.addEventListener("click", cambiarForm)
+        buttonIniciaSesion.addEventListener("click", cambiarForm)
     }
 
 
 
-    const spanEmailLogin = document.querySelector(".msgUserLogin");
-    const spanPassLogin = document.querySelector(".msgPasswordLogin");
 
     if (inputEmailLogin && inputPassLogin && buttonLogin && buttonClear) {
         buttonLogin.addEventListener("click", (e) => {
@@ -194,26 +129,33 @@ document.addEventListener("DOMContentLoaded", function () {
                     spanPassLogin.innerText = "";
                     spanPassLogin.style.visibility = "hidden";
                     if(iniciarSesion(inputEmailLogin, spanEmailLogin, inputPassLogin, spanPassLogin)) {
-                        window.location.href = "../index.html";
+                        window.location.href = "../pages/account.html";
                     }
                 }
             }
         })
     }
 
-    const spanEmailSingUp = document.querySelector(".msgEmailSignUp");
-    const spanPassSingUp = document.querySelector(".msgPassSignUp");
-    const spanUserSignUp = document.querySelector(".msgUserSignUp")
+
+
 
     if (inputEmail && inputPass && buttonSignUp && buttonSignUpClear) {
         buttonSignUp.addEventListener("click", (e) => {
             e.preventDefault()
             if((validarEmail(inputEmail,spanEmailSingUp, 7, 50)) && (validarPassword(inputPass, spanPassSingUp, 8, 16))){
-                registrarUsuario(formRegister, inputNombre, inputApellido, inputEmail, spanEmailSingUp, inputUser, spanUserSignUp, inputPass, inputFechaNac, inputDireccion, selectDepartamento)
+                if(registrarUsuario(formRegister, inputNombre, inputApellido, inputEmail, spanEmailSingUp, inputUser, spanUserSignUp, inputPass, inputFechaNac, selectDepartamento, inputDireccion)){
+                    
+                }
             }
         })
-    }    
+    }
 
+
+
+
+
+
+        
 
 });
 
