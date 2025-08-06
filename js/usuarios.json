@@ -1,0 +1,24 @@
+[
+    {
+        "id": 1,
+        "nombre": "Maximiliano",
+        "apellido": "Vidal",
+        "rol": "Administrador",
+        "estado": "Activo",
+        "fechaCreacion": "2025-08-06T10:00:00Z",
+        "ultimaAcceso": "2025-08-06T18:45:00Z",
+        "mail": "vidal.maximiliano@example.com",
+        "eliminado": false
+    },
+    {
+        "id": 2,
+        "nombre": "Mateo",
+        "apellido": "Pérez",
+        "rol": "Usuario",
+        "estado": "Inactivo",
+        "fechaCreacion": "2025-08-06T10:00:00Z",
+        "ultimaAcceso": "2025-08-06T18:45:00Z",
+        "mail": "perez.mateo@example.com",
+        "eliminado": true
+    }
+]

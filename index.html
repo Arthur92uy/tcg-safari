@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./css/style.css">
+    <title>Gestion de usuarios</title>
+</head>
+<body>
+    <header class="header">
+        <nav class="header__nav">
+            <div class="header__logo">
+                <img src="./img/avatar-de-usuarios.png" alt="Logo de UserHub" class="header__logo-img">
+                <div class="header__logo-text">
+                    <h1 class="header__logo-title">UserHub</h1>
+                    <p class="header__logo-subtitle">Gestión Empresarial</p>
+                </div>
+            </div>
+            <div class="header__user">
+                <div class="header__user-info">
+                    <p>Usuario</p>
+                    <div class="header__user-rol">
+                        <img src="./img/blindaje.png" alt="Imagen de escudo">
+                        <span class="header__user-subtitle">Rol de usuario</span>
+                    </div>
+                </div>
+                <div class="header__user-icons">
+                    <span class="initials">
+                        US
+                    </span>
+                    <img src="./img/avatar-de-usuarios.png" alt="Logo de Avatar" class="header__user-img">
+                    <img src="./img/cerrar-sesion.png" alt="Icono de cerrar sesion" class="header__user-img">
+                </div>
+            </div>
+
+        </nav>
+    </header>
+    <main class="main">
+        <div class="main__info">
+            <div>
+                <h2>Usuarios</h2>
+                <p>x usuarios encontrados</p>
+            </div>
+            <button type="button" class="main__button">
+                <img src="./img/plus-pequeno.png" alt="Simbolo de plus">
+                <span>Nuevo Usuario</span>
+            </button>
+        </div>
+
+        <div class="main__container-inputs">
+            <div class="main__container__search">
+                <input type="search" title="Buscador" placeholder="Buscar usuarios..." class="search">
+                <img src="./img/lupa-grande.png" alt="Imagen de lupa">
+            </div>
+            <div class="main__container__filters">
+                <select title="Select roles" class="main__container__filter-roles" name="roles">
+                    <option value="todos-roles" selected disabled>Todos los roles</option>
+                    <option value="administrador">Administrador</option>
+                    <option value="manager">Manager</option>
+                    <option value="usuarios">Usuario</option>
+                </select>
+                <select title="Select estados" class="main__container__filter-estados" name="estados">
+                    <option value="todos-estados" selected disabled>Todos los estados</option>
+                    <option value="activo">Activo</option>
+                    <option value="inactivo">Inactivo</option>
+                </select>
+            </div>
+
+        </div>
+        <div class="main__container__cards">
+            <div class="main__cards">
+                <div class="card__options">
+                    <div class="card__initials">CL</div>
+                    <div class="card__icons">
+                        <button type="button" title="ver">
+                            <img src="./img/ojo.png" alt="">
+                        </button>
+                        <button type="button" title="editar">
+                            <img src="./img/lapiz-de-color.png" alt="">
+                        </button>
+                        <button type="button" title="eliminar">
+                            <img src="./img/tacho-de-reciclaje.png" alt="">
+                        </button>
+                    </div>
+                </div>
+                <h3 class="card__user-name">Carlos Lopez</h3>
+                <p class="card__user-mail">manager@empresa.com</p>
+                <div class="card__user-info">
+                    <span class="card__user-rol">Manager</span>
+                    <span class="card__user-status">Activo</span>
+                </div>
+                <div class="card__user-dates">
+                    <p class="card__user-create">Creado:09/01/2025</p>
+                    <p class="card__user-last-access">Ultimo acceso: 18/01/2025</p>
+                </div>
+            </div>
+
+        </div>
+    </main>
+    <footer class="footer">
+
+    </footer>
+</body>
+</html>

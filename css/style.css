@@ -1,0 +1,326 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+
+/* ===== Reset y base tipográfica ===== */
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    border: 0.5px rgb(229 ,231 ,235);
+}
+
+
+
+html {
+    font-size: 62.5%;
+}
+
+html, body {
+    background-color: #171717;
+    color: #FFF;
+    font-family: 'Roboto', sans-serif;
+}
+
+.header__logo-title{
+    font-size: 2rem;
+}
+
+h2 {
+    font-size: 2.4rem;
+    font-weight: 400;
+    letter-spacing: 0.05rem;
+}
+
+p {
+    font-size: 1.6rem;
+}
+
+
+.header {
+    padding: 16px 24px;
+    border-bottom-style: solid;
+    background-color: #333;
+}
+
+.header__nav {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.header__logo {
+    display: inline-flex;
+    flex-direction: row;
+}
+
+.header__logo-subtitle {
+    font-size: 12px;
+}
+
+.header__logo-title {
+    font-weight: 500;
+    letter-spacing: 0.05rem;
+}
+
+.header__logo-img {
+    width: 42px;
+    height:42px;
+    padding: 5px;
+    background-color: #3B82F6;
+    border-radius: 5px;
+}
+
+.header__logo-text {
+    padding: 5PX;
+}
+
+.header__user {
+    display: flex;
+    flex-direction: row;
+}
+
+.header__user-info {
+    text-align: right;
+    display: flex;
+    flex-direction: column;
+}
+
+.header__user-info p{
+    font-size: 14px;
+}
+
+.header__user-subtitle {
+    background-color: #FEE2E2;
+    color: #991B1B;
+    font-weight: 500;
+    padding: 4px 8px;
+    border-radius: 15px;
+    font-size: 12px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.header__user-rol {
+    display: flex;
+    flex-direction: row;
+    padding: 5px;
+}
+
+.header__user-rol img {
+    width: 27.5px;
+    height: 27.5px;
+    margin-right: 5px;
+}
+
+.header__user-info p {
+    padding: 5px 10px 0 10px;
+}
+
+.header__user-icons {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+    min-width: 200px
+}
+
+.initials, .card__initials{
+    font-size: 1.4rem;
+    border-style: solid;
+    padding: 5px;
+    border-radius: 50%;
+    background-color: #3B82F6;
+    height: 32px;
+    width: 32px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.header__user-img {
+    width: 36px;
+    height: 36px;
+    padding: 5px;
+}
+
+.main {
+    padding: 3.2rem 2.4rem;
+    max-width: 128rem;
+    margin: 0 auto;
+    max-height: 100vh;
+    height: 100%;
+}
+
+.main__info {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content:space-between ;
+}
+
+.main__info div p {
+    margin-top: 4px;
+}
+
+.main__button {
+    border-radius: 10px;
+    background-color: #3B82F6;
+    color:#FFF;
+    font-size: 1.6rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.8rem 1.6rem;
+    height: 40px;
+}
+
+.main__button img {
+    width: 24px;
+    height: 24px;
+}
+
+.main__container-inputs {
+    padding: 1.6rem;
+    margin-top: 2.4rem;
+    background-color: #333;
+    border-radius: 10px;
+    border-style: solid;
+}
+
+.main__container-inputs, .main__container__filters, .main__container__search {
+    display: flex;
+    flex-direction: row;
+    gap: 1.6rem;
+    justify-content: center;
+    align-items: center;
+}
+
+.search, .main__container__search {
+    width: 100%;
+}
+
+.main__container__search {
+    position: relative;
+}
+
+.main__container__search img {
+    position: absolute;
+    left: 1.6rem;
+    width: 16px;
+    height: auto;
+}
+
+.search {
+    height: 100%;
+    font-size: 1.6rem;
+    background-color: #333;
+    color: #FFF;
+    padding: 8px 16px 8px 40px;
+    border-radius: 10px;
+    border-style: solid;
+    height: 40px;
+}
+
+.search::placeholder {
+    color: #FFF;
+    font-size: 1.6rem;
+}
+
+.main__container__filter-roles, .main__container__filter-estados {
+    border-radius: 10px;
+    background-color: #333;
+    color:#FFF;
+    font-size: 1.6rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.8rem 1.6rem;
+    height: 40px;
+    border-style: solid;
+}
+
+.main__container__cards {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-row: auto;
+    border-radius: 10px;
+    margin-top: 24px;
+    gap: 24px;
+}
+
+.main__cards {
+    padding: 24px;
+    border-style: solid;
+    border-radius: 10px;
+    background-color: #333;
+    min-height: 250px;
+    min-width: 350px;
+}
+
+.card__options {
+    width: 100%;
+    margin-bottom: 16px;
+    display: flex;
+    flex-direction: row;
+    justify-content:space-between ;
+}
+
+.card__initials{
+    height: 48px;
+    width: 48px;
+    font-size: 16px;
+}
+
+.card__user-name {
+    font-size: 1.6rem;
+}
+
+.card__user-mail {
+    font-size: 1.4rem;
+    margin-top: 8px;
+}
+
+.card__user-info {
+    padding-top: 8px;
+    margin-top: 8px;
+    display: flex;
+    flex-direction: row;
+}
+
+.card__user-rol, .card__user-status {
+    font-weight: 500;
+    padding: 4px 8px;
+    border-radius: 15px;
+    font-size: 12px;
+    align-items: center;
+    background-color: aquamarine;
+    color: #333;
+}
+
+.card__user-status {
+    margin-left: 8px;
+}
+
+.card__user-dates {
+    margin-top: 8px;
+    padding-top: 8px;
+}
+
+.card__user-create, .card__user-last-access {
+    font-size: 12px;
+}
+
+.card__icons button {
+    padding: 8px;
+    background-color: transparent;
+}
+
+.card__icons button img {
+    height: 16px;
+    width: 16px;
+}
+
+.card__icons button[title="editar"], .card__icons button[title="eliminar"] {
+    margin-left: 4px;
+}
