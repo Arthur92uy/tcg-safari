@@ -298,6 +298,21 @@ p {
     color: #333;
 }
 
+.administrador, .inactivo {
+    background-color: #FEE2E2;
+    color: #991B1B;
+}
+
+.manager {
+    background-color: #DBEAFE;
+    color: #1E40AF;
+}
+
+.user, .activo {
+    color: #166534;
+    background-color: #DCFCE7;
+}
+
 .card__user-status {
     margin-left: 8px;
 }

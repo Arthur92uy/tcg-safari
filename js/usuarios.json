@@ -19,6 +19,6 @@
         "fechaCreacion": "2025-08-06T10:00:00Z",
         "ultimaAcceso": "2025-08-06T18:45:00Z",
         "mail": "perez.mateo@example.com",
-        "eliminado": true
+        "eliminado": false
     }
 ]
