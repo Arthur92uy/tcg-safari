@@ -355,11 +355,8 @@ p {
     margin-left: 4px;
 }
 
-.hide {
-    display: none;
-}
 
-.main__modal-login {
+.main__modal-bienvenida, .main__modal-login {
     background-color: #333;
     border-style: solid;
     border-radius: 10px;
@@ -381,21 +378,20 @@ p {
     padding: 5px;
     background-color: #3B82F6;
     border-radius: 10px;
-    margin-bottom: 16px;
 }
 
-.main__modal-login span {
+.main__modal-bienvenida span {
     font-size: 2.4rem;
     margin-bottom: 4px;
 }
 
-.main__modal-login h2{
+.main__modal-bienvenida h2{
     font-size: 1.8rem;
     margin-bottom: 8px;
 
 }
 
-.main__modal-login p {
+.main__modal-bienvenida p {
     font-size: 1.6rem;
 }
 
@@ -404,7 +400,7 @@ p {
     margin: 0;
 }
 
-.main__modal-login div {
+.main__modal-bienvenida div, .main__modal-login div {
     margin-bottom: 24px;
     display: flex;
     flex-direction: column;
@@ -412,4 +408,49 @@ p {
     justify-content: center;
     text-align: center;
     max-width: 38.4rem;
+}
+
+.main__modal-login div {
+    max-width: 50rem;
+}
+
+.main__modal-login div h2 {
+    padding-bottom: 16px;
+    text-align: left;
+    width: 100%;
+}
+
+.hide {
+    display: none;
+}
+
+.main__modal-login .main__modal-login__buttons {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 0;
+}
+
+.main__modal-login__buttons .main__modal-button {
+    width: 190px;
+}
+
+.main__modal-login input {
+    width: 40rem;
+    border-radius: 10px;
+    background-color: #333;
+    border-style: solid;
+    color:#FFF;
+    font-size: 1.6rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.8rem 1.6rem;
+    height: 40px;
+}
+
+.main__modal-login .main__modal-login__container {
+    margin-bottom: 0;
 }

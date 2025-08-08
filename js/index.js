@@ -1,3 +1,5 @@
+
+
 document.addEventListener("DOMContentLoaded", function() {
 
     const URL_JSON = 'https://raw.githubusercontent.com/Arthur92uy/tcg-safari/refs/heads/main/js/usuarios.json'
@@ -73,6 +75,47 @@ document.addEventListener("DOMContentLoaded", function() {
         }
     }
     // --------------------------------------------------------------------------- //
+
+    const botonCancelarModal = document.querySelector(".main__modal-login__buttons .main__modal-button.cancelar");
+    const mainModalLogin = document.querySelector(".main__modal-login");
+    const mainModalBienvenida = document.querySelector(".main__modal-bienvenida");
+    const botonIniciarSesionHeader = document.querySelector(".header__button.login");
+    const botonIniciarSesionBienvenida = document.querySelector(".main__modal-bienvenida .main__modal-button");
+    const IniciarSesionLogin = document.querySelector(".main__modal-login form");
+    const emailLogin = document.querySelector(".email-login")
+    const contraseñaLogin = document.querySelector(".contraseña-login")
+
+    botonCancelarModal.addEventListener("click", () => {
+        mainModalLogin.classList.add("hide")
+        mainModalBienvenida.classList.remove("hide")
+    })
+
+    botonIniciarSesionHeader.addEventListener("click", () => {
+        mainModalBienvenida.classList.add("hide")
+        mainModalLogin.classList.remove("hide")
+    })
+
+    botonIniciarSesionBienvenida.addEventListener("click", () => {
+        mainModalBienvenida.classList.add("hide")
+        mainModalLogin.classList.remove("hide")
+    })
+
+    IniciarSesionLogin.addEventListener("submit", function(event){
+        event.preventDefault();
+        if((validator.isEmail(emailLogin.value)) && (
+            validator.isStrongPassword(contraseñaLogin.value, {
+                minLength: 8,
+                minLowercase: 1,
+                minUppercase: 1,
+                minNumbers: 1,
+                minSymbols: 1
+            })
+        )) {
+            console.log("valores validos, chequear existencia")
+        } else {
+            console.log("error")
+        }
+    })
 
     inicializarUsuarios()
     actualizarAvatarCuenta()
