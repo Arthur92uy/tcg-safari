@@ -82,27 +82,32 @@ document.addEventListener("DOMContentLoaded", function() {
     const botonIniciarSesionHeader = document.querySelector(".header__button.login");
     const botonIniciarSesionBienvenida = document.querySelector(".main__modal-bienvenida .main__modal-button");
     const IniciarSesionLogin = document.querySelector(".main__modal-login form");
-    const emailLogin = document.querySelector(".email-login")
-    const contraseñaLogin = document.querySelector(".contraseña-login")
+    const emailLogin = document.querySelector(".email-login");
+    const contraseñaLogin = document.querySelector(".contraseña-login");
+    const loginHeader = document.querySelector(".header__login");
+    const userInfoHeader = document.querySelector(".header__user-info");
+    const userIconsHeader = document.querySelector(".header__user-icons");
+    const infoMain = document.querySelector(".main__info");
+    const inputsContainerMain = document.querySelector(".main__container-inputs");
 
     botonCancelarModal.addEventListener("click", () => {
-        mainModalLogin.classList.add("hide")
-        mainModalBienvenida.classList.remove("hide")
+        mainModalLogin.classList.add("hide");
+        mainModalBienvenida.classList.remove("hide");
     })
 
     botonIniciarSesionHeader.addEventListener("click", () => {
-        mainModalBienvenida.classList.add("hide")
-        mainModalLogin.classList.remove("hide")
+        mainModalBienvenida.classList.add("hide");
+        mainModalLogin.classList.remove("hide");
     })
 
     botonIniciarSesionBienvenida.addEventListener("click", () => {
-        mainModalBienvenida.classList.add("hide")
-        mainModalLogin.classList.remove("hide")
+        mainModalBienvenida.classList.add("hide");
+        mainModalLogin.classList.remove("hide");
     })
 
     function validarConstraseñaMail (email, contraseña) {
         if(!validator.isEmail(email.value)) {
-            return false
+            return false;
         }
         if (!validator.isStrongPassword(contraseña.value,{
             minLength: 8,
@@ -112,21 +117,46 @@ document.addEventListener("DOMContentLoaded", function() {
             minSymbols: 1
         }))
         {
-            return false
+            return false;
         }
     return true
+    }
+
+    function iniciarSesion(email, pass){
+    const usuarios = JSON.parse(localStorage.getItem('usuarios')) || []
+    const usuarioEncontrado = usuarios.find(u => u.email === email.value.trim().toLowerCase());
+    if(!usuarioEncontrado) {
+        console.log("error en email");
+        return false;
+    }
+    if(usuarioEncontrado.clave === pass.value.trim()){
+        sessionStorage.setItem('usuarioActivo', JSON.stringify(usuarioEncontrado));
+        mainModalLogin.classList.add("hide");
+        loginHeader.classList.add("hide");
+        userIconsHeader.classList.remove("hide");
+        userInfoHeader.classList.remove("hide");
+        cargarUsuariosEnCards(contenedorDeCards);
+        console.log(contenedorDeCards.innerHTML)
+        contenedorDeCards.classList.remove("hide");
+        infoMain.classList.remove("hide")
+        inputsContainerMain.classList.remove("hide")
+        console.log("Carga exitosa");
+        return true;
+    } else {
+        console.log("error en contrasena");
+        return false;
+    }
     }
 
     IniciarSesionLogin.addEventListener("submit", function(event){
         event.preventDefault();
         if(validarConstraseñaMail(emailLogin, contraseñaLogin)) {
-            
+            iniciarSesion(emailLogin, contraseñaLogin);
         } else {
-            console.log("error")
+            console.log("error");
         }
     })
 
-    inicializarUsuarios()
-    actualizarAvatarCuenta()
-    cargarUsuariosEnCards(contenedorDeCards)
+    inicializarUsuarios();
+    actualizarAvatarCuenta();
 })

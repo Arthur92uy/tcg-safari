@@ -64,14 +64,14 @@
                     <img src="./img/avatar-de-usuarios.png" alt="Logo de UserHub" class="main__logo-img">
                 </div>
                 <h2>Iniciar Sesión</h2>
-                <form>
+                <form name="login">
                     <div>
                         <img src="" alt="">
-                        <input type="email" title="Email" placeholder="usuario@empresa.com" class="email-login">
+                        <input type="email" title="Email" placeholder="usuario@empresa.com" class="email-login" name="email" autocomplete="email">
                     </div>
                     <div>
                         <img src="" alt="">
-                        <input type="password" title="Contraseña" placeholder="Contraseña" class="contraseña-login">
+                        <input type="password" title="Contraseña" placeholder="Contraseña" class="contraseña-login" name="contrasena">
                     </div>
                     <div class="main__modal-login__buttons">
                         <button type="reset" class="main__modal-button cancelar">
@@ -98,7 +98,7 @@
         </div>
         <div class="main__container-inputs hide">
             <div class="main__container__search">
-                <input type="search" title="Buscador" placeholder="Buscar usuarios..." class="search">
+                <input type="search" title="Buscador" placeholder="Buscar usuarios..." class="search" name="search">
                 <img src="./img/lupa-grande.png" alt="Imagen de lupa">
             </div>
             <div class="main__container__filters">
@@ -116,7 +116,7 @@
             </div>
 
         </div>
-        <div class="main__container__cards hide">
+        <div class="main__container__cards">
 
         </div>
     </main>

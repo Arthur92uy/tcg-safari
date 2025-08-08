@@ -84,6 +84,8 @@ p {
 .header__user {
     display: flex;
     flex-direction: row;
+    min-width: 300px;
+    justify-content: space-between;
 }
 
 .header__user-info {
@@ -127,9 +129,9 @@ p {
 .header__user-icons {
     display: flex;
     flex-direction: row;
-    justify-content: space-evenly;
+    justify-content: space-between;
     align-items: center;
-    min-width: 200px
+    min-width: 150px
 }
 
 .initials, .card__initials{
@@ -153,12 +155,13 @@ p {
 
 .main {
     padding: 3.2rem 2.4rem;
+    width: 100%;
     max-width: 128rem;
     height: 100%;
     margin: 0 auto;
     display: flex;
-    justify-content: center;
     align-items: center;
+    flex-direction: column;
     overflow-y: auto;
 }
 
@@ -201,6 +204,7 @@ p {
     background-color: #333;
     border-radius: 10px;
     border-style: solid;
+    width: 100%;
 }
 
 .main__container-inputs, .main__container__filters, .main__container__search {
@@ -262,6 +266,7 @@ p {
     border-radius: 10px;
     margin-top: 24px;
     gap: 24px;
+    width: 100%;
 }
 
 .main__cards {
