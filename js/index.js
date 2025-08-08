@@ -47,7 +47,7 @@ document.addEventListener("DOMContentLoaded", function() {
                         </div>
                     </div>
                     <h3 class="card__user-name">${usuario.nombre} ${usuario.apellido}</h3>
-                    <p class="card__user-mail">${usuario.mail}</p>
+                    <p class="card__user-mail">${usuario.email}</p>
                     <div class="card__user-info">
                         <span class="card__user-rol">${usuario.rol}</span>
                         <span class="card__user-status">${usuario.estado}</span>

@@ -1,13 +1,14 @@
 [
     {
         "id": 1,
-        "nombre": "Maximiliano",
-        "apellido": "Vidal",
+        "nombre": "Lucía",
+        "apellido": "Fernández",
         "rol": "Administrador",
         "estado": "Activo",
-        "fechaCreacion": "2025-08-06T10:00:00Z",
-        "ultimaAcceso": "2025-08-06T18:45:00Z",
-        "mail": "vidal.maximiliano@example.com",
+        "fechaCreacion": "2024-11-12T10:30:00Z",
+        "ultimoAcceso": "2025-08-05T18:45:00Z",
+        "email": "lucia.fernandez@example.com",
+        "clave": "Lucia123!",
         "eliminado": false
     },
     {
@@ -16,9 +17,22 @@
         "apellido": "Pérez",
         "rol": "Usuario",
         "estado": "Inactivo",
-        "fechaCreacion": "2025-08-06T10:00:00Z",
-        "ultimaAcceso": "2025-08-06T18:45:00Z",
-        "mail": "perez.mateo@example.com",
+        "fechaCreacion": "2025-01-20T14:15:00Z",
+        "ultimoAcceso": "2025-06-30T09:10:00Z",
+        "email": "mateo.perez@example.com",
+        "clave": "Mateo456@",
+        "eliminado": true
+    },
+    {
+        "id": 3,
+        "nombre": "Sofía",
+        "apellido": "Gómez",
+        "rol": "Usuario",
+        "estado": "Activo",
+        "fechaCreacion": "2025-03-10T09:00:00Z",
+        "ultimoAcceso": "2025-08-07T12:30:00Z",
+        "email": "sofia.gomez@example.com",
+        "clave": "Sofia789#",
         "eliminado": false
     }
 ]
