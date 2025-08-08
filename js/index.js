@@ -48,15 +48,26 @@ document.addEventListener("DOMContentLoaded", function() {
                     </div>
                     <h3 class="card__user-name">${usuario.nombre} ${usuario.apellido}</h3>
                     <p class="card__user-mail">${usuario.email}</p>
-                    <div class="card__user-info">
-                        <span class="card__user-rol">${usuario.rol}</span>
-                        <span class="card__user-status">${usuario.estado}</span>
-                    </div>
+                    <div class="card__user-info">`
+                    if(usuario.rol === "Administrador") {
+                        contenedor.innerHTML+= `<span class="card__user-rol administrador">${usuario.rol}</span>`
+                    } else if (usuario.rol === "Manager") {
+                        contenedor.innerHTML+= `<span class="card__user-rol manager">${usuario.rol}</span>`
+                    } else {
+                        contenedor.innerHTML+= `<span class="card__user-rol usuario">${usuario.rol}</span>`
+                    }
+                    if(usuario.estado === "Activo") {
+                        `<span class="card__user-status activo">${usuario.estado}</span>`
+                    } else {
+                        `<span class="card__user-status inactivo">${usuario.estado}</span>`
+                    }
+                    contenedor.innerHTML+=`</div>
                     <div class="card__user-dates">
                         <p class="card__user-create">Creado: ${usuario.fechaCreacion}</p>
                         <p class="card__user-last-access">Ultimo acceso: ${usuario.ultimoAcceso}</p>
                     </div>
                 </div>`
+                    
             }
         }
     }
@@ -89,6 +100,8 @@ document.addEventListener("DOMContentLoaded", function() {
     const userIconsHeader = document.querySelector(".header__user-icons");
     const infoMain = document.querySelector(".main__info");
     const inputsContainerMain = document.querySelector(".main__container-inputs");
+    const main = document.querySelector(".main");
+    const userContainerHeader = document.querySelector(".header__user")
 
     botonCancelarModal.addEventListener("click", () => {
         mainModalLogin.classList.add("hide");
@@ -133,10 +146,11 @@ document.addEventListener("DOMContentLoaded", function() {
         sessionStorage.setItem('usuarioActivo', JSON.stringify(usuarioEncontrado));
         mainModalLogin.classList.add("hide");
         loginHeader.classList.add("hide");
+        userContainerHeader.classList.remove("header__user--justify");
         userIconsHeader.classList.remove("hide");
         userInfoHeader.classList.remove("hide");
         cargarUsuariosEnCards(contenedorDeCards);
-        console.log(contenedorDeCards.innerHTML)
+        main.classList.remove("main--justify-center");
         contenedorDeCards.classList.remove("hide");
         infoMain.classList.remove("hide")
         inputsContainerMain.classList.remove("hide")

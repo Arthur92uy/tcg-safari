@@ -88,15 +88,21 @@ p {
     justify-content: space-between;
 }
 
+.header__user--justify {
+    justify-content: flex-end;
+}
+
 .header__user-info {
     text-align: right;
     display: flex;
+    justify-content: flex-end;
     align-items: center;
     flex-direction: column;
 }
 
 .header__user-info p{
     font-size: 14px;
+    width: 100%;
 }
 
 .header__user-subtitle {
@@ -140,8 +146,8 @@ p {
     padding: 5px;
     border-radius: 50%;
     background-color: #3B82F6;
-    height: 32px;
-    width: 32px;
+    height: 36px;
+    width: 36px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -163,6 +169,10 @@ p {
     align-items: center;
     flex-direction: column;
     overflow-y: auto;
+}
+
+.main--justify-center {
+    justify-content: center;
 }
 
 .main__info {
@@ -328,7 +338,7 @@ p {
     color: #1E40AF;
 }
 
-.user, .activo {
+.usuario, .activo {
     color: #166534;
     background-color: #DCFCE7;
 }
