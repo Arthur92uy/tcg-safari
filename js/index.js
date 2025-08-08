@@ -100,18 +100,27 @@ document.addEventListener("DOMContentLoaded", function() {
         mainModalLogin.classList.remove("hide")
     })
 
+    function validarConstraseñaMail (email, contraseña) {
+        if(!validator.isEmail(email.value)) {
+            return false
+        }
+        if (!validator.isStrongPassword(contraseña.value,{
+            minLength: 8,
+            minLowercase: 1,
+            minUppercase: 1,
+            minNumbers: 1,
+            minSymbols: 1
+        }))
+        {
+            return false
+        }
+    return true
+    }
+
     IniciarSesionLogin.addEventListener("submit", function(event){
         event.preventDefault();
-        if((validator.isEmail(emailLogin.value)) && (
-            validator.isStrongPassword(contraseñaLogin.value, {
-                minLength: 8,
-                minLowercase: 1,
-                minUppercase: 1,
-                minNumbers: 1,
-                minSymbols: 1
-            })
-        )) {
-            console.log("valores validos, chequear existencia")
+        if(validarConstraseñaMail(emailLogin, contraseñaLogin)) {
+            
         } else {
             console.log("error")
         }

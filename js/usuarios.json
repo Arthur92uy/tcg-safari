@@ -5,8 +5,8 @@
         "apellido": "Fernández",
         "rol": "Administrador",
         "estado": "Activo",
-        "fechaCreacion": "2024-11-12T10:30:00Z",
-        "ultimoAcceso": "2025-08-05T18:45:00Z",
+        "fechaCreacion": "12/11/2024 10:30:00",
+        "ultimoAcceso": "05/08/2025 18:45:00",
         "email": "lucia.fernandez@example.com",
         "clave": "Lucia123!",
         "eliminado": false
@@ -17,11 +17,11 @@
         "apellido": "Pérez",
         "rol": "Usuario",
         "estado": "Inactivo",
-        "fechaCreacion": "2025-01-20T14:15:00Z",
-        "ultimoAcceso": "2025-06-30T09:10:00Z",
+        "fechaCreacion": "20/01/2025 14:15:00",
+        "ultimoAcceso": "30/06/2025 09:10:00",
         "email": "mateo.perez@example.com",
         "clave": "Mateo456@",
-        "eliminado": true
+        "eliminado": false
     },
     {
         "id": 3,
@@ -29,8 +29,8 @@
         "apellido": "Gómez",
         "rol": "Usuario",
         "estado": "Activo",
-        "fechaCreacion": "2025-03-10T09:00:00Z",
-        "ultimoAcceso": "2025-08-07T12:30:00Z",
+        "fechaCreacion": "10/03/2025 09:00:00",
+        "ultimoAcceso": "07/08/2025 12:30:00",
         "email": "sofia.gomez@example.com",
         "clave": "Sofia789#",
         "eliminado": false
