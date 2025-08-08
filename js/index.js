@@ -68,6 +68,8 @@ document.addEventListener("DOMContentLoaded", function() {
         if (nombre && usuario.nombre && usuario.apellido && usuario.rol) {
             nombre.innerText = usuario.nombre + " " + usuario.apellido;
             rol.innerText = usuario.rol
+        } else {
+            console.log("No se cargo un usuario activo")
         }
     }
     // --------------------------------------------------------------------------- //

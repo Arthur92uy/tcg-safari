@@ -17,26 +17,49 @@
                 </div>
             </div>
             <div class="header__user">
-                <div class="header__user-info">
+                <div class="header__user-info hide">
                     <p>Usuario</p>
                     <div class="header__user-rol">
                         <img src="./img/blindaje.png" alt="Imagen de escudo">
                         <span class="header__user-subtitle">Rol de usuario</span>
                     </div>
                 </div>
-                <div class="header__user-icons">
+                <div class="header__user-icons hide">
                     <span class="initials">
                         US
                     </span>
                     <img src="./img/avatar-de-usuarios.png" alt="Logo de Avatar" class="header__user-img">
                     <img src="./img/cerrar-sesion.png" alt="Icono de cerrar sesion" class="header__user-img">
                 </div>
+                <div class="header__login">
+                    <button type="button" class="header__button">
+                    <span>Iniciar sesión</span>
+                    </button>
+                </div>
+
             </div>
 
         </nav>
     </header>
     <main class="main">
-        <div class="main__info">
+
+        <div class="main__modal-login">
+            <div>
+                <div>
+                    <img src="./img/avatar-de-usuarios.png" alt="Logo de UserHub" class="main__logo-img">
+                </div>
+                <span>UserHub</span>
+                <h2>Sistema de Gestión de Usuarios</h2>
+                <p>Plataforma empresarial para administración de usuarios y perfiles</p>
+            </div>
+            
+            <button type="button" class="main__modal-button">
+                <span>Iniciar Sesión</span>
+            </button>
+
+        </div>
+
+        <div class="main__info hide">
             <div>
                 <h2>Usuarios</h2>
                 <p>x usuarios encontrados</p>
@@ -46,8 +69,7 @@
                 <span>Nuevo Usuario</span>
             </button>
         </div>
-
-        <div class="main__container-inputs">
+        <div class="main__container-inputs hide">
             <div class="main__container__search">
                 <input type="search" title="Buscador" placeholder="Buscar usuarios..." class="search">
                 <img src="./img/lupa-grande.png" alt="Imagen de lupa">
@@ -67,7 +89,7 @@
             </div>
 
         </div>
-        <div class="main__container__cards">
+        <div class="main__container__cards hide">
 
         </div>
     </main>

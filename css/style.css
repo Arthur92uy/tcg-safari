@@ -12,12 +12,19 @@
 
 html {
     font-size: 62.5%;
+    height: 100%;
 }
 
 html, body {
     background-color: #171717;
     color: #FFF;
     font-family: 'Roboto', sans-serif;
+    display: flex;
+    flex-direction: column;
+}
+
+body {
+    height: 100%;
 }
 
 .header__logo-title{
@@ -82,6 +89,7 @@ p {
 .header__user-info {
     text-align: right;
     display: flex;
+    align-items: center;
     flex-direction: column;
 }
 
@@ -146,9 +154,12 @@ p {
 .main {
     padding: 3.2rem 2.4rem;
     max-width: 128rem;
-    margin: 0 auto;
-    max-height: 100vh;
     height: 100%;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow-y: auto;
 }
 
 .main__info {
@@ -163,7 +174,7 @@ p {
     margin-top: 4px;
 }
 
-.main__button {
+.main__button, .header__button, .main__modal-button {
     border-radius: 10px;
     background-color: #3B82F6;
     color:#FFF;
@@ -173,6 +184,10 @@ p {
     justify-content: center;
     padding: 0.8rem 1.6rem;
     height: 40px;
+}
+
+.main__modal-button {
+    width: 100%;
 }
 
 .main__button img {
@@ -338,4 +353,63 @@ p {
 
 .card__icons button[title="editar"], .card__icons button[title="eliminar"] {
     margin-left: 4px;
+}
+
+.hide {
+    display: none;
+}
+
+.main__modal-login {
+    background-color: #333;
+    border-style: solid;
+    border-radius: 10px;
+    padding: 32px;
+    margin: 0 16px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    box-shadow:
+    0 0 10px rgba(51, 51, 51, 1),
+    0 10px 15px -3px rgba(51, 51, 51, 1),
+    0 4px 6px -4px rgba(51, 51, 51, 1);
+}
+
+.main__logo-img {
+    height: 64px;
+    width: 64px;
+    padding: 5px;
+    background-color: #3B82F6;
+    border-radius: 10px;
+    margin-bottom: 16px;
+}
+
+.main__modal-login span {
+    font-size: 2.4rem;
+    margin-bottom: 4px;
+}
+
+.main__modal-login h2{
+    font-size: 1.8rem;
+    margin-bottom: 8px;
+
+}
+
+.main__modal-login p {
+    font-size: 1.6rem;
+}
+
+.main__modal-button span {
+    font-size: 16px;
+    margin: 0;
+}
+
+.main__modal-login div {
+    margin-bottom: 24px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    max-width: 38.4rem;
 }
