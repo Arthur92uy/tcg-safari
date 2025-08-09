@@ -115,6 +115,7 @@ document.addEventListener("DOMContentLoaded", function() {
     const main = document.querySelector(".main");
     const userContainerHeader = document.querySelector(".header__user")
     const mainModalUsuario = document.querySelector(".main__modal-usuario")
+    const overlay = document.querySelector(".overlay")
 
     botonCancelarModal.addEventListener("click", () => {
         mainModalLogin.classList.add("hide");
@@ -194,6 +195,7 @@ document.addEventListener("DOMContentLoaded", function() {
             if (usuario) {
                 cargarModalUsuario(usuario, mainModalUsuario)
                 mainModalUsuario.classList.remove("hide")
+                overlay.classList.remove("hide")
             }
         }
     })
@@ -286,13 +288,15 @@ function cargarModalUsuario (usuario, contenedor) {
     mainModalUsuario.addEventListener("click", function(e) {
         if(e.target.closest(".main__modal-usuario__icons.cancelar")){
 
-                mainModalUsuario.classList.add("hide")
+            mainModalUsuario.classList.add("hide")
+            overlay.classList.add("hide")
         }
     })
     mainModalUsuario.addEventListener("click", function(e) {
         if(e.target.closest(".main__modal-button.cancelar")){
 
-                mainModalUsuario.classList.add("hide")
+            mainModalUsuario.classList.add("hide")
+            overlay.classList.add("hide")
         }
     })
 
