@@ -201,6 +201,20 @@ document.addEventListener("DOMContentLoaded", function() {
     })
 
 function cargarModalUsuario (usuario, contenedor) {
+    let rolClass
+    let statusClass
+    if(usuario.rol === "Administrador") {
+        rolClass="administrador"
+    } else if (usuario.rol === "Manager") {
+        rolClass="manager"
+    } else {
+        rolClass="usuario"
+    }
+    if(usuario.estado === "Activo") {
+        statusClass="activo"
+    } else {
+        statusClass="inactivo"
+    }
     contenedor.innerHTML = `
         <div class="main__modal-usuario__portada">
             <div class="main__modal-usuario__portada__titulo">
@@ -242,7 +256,7 @@ function cargarModalUsuario (usuario, contenedor) {
                         </div>
                         <div class="modal-usuario__container-text">
                             <p>Rol</p>
-                            <span>${usuario.rol}</span>
+                            <span class="${rolClass}">${usuario.rol}</span>
                         </div>
                     </div>
                     <div class="modal-usuario__container">
@@ -251,7 +265,7 @@ function cargarModalUsuario (usuario, contenedor) {
                         </div>
                         <div class="modal-usuario__container-text">
                             <p>Estado</p>
-                            <span>${usuario.estado}</span>
+                            <span class="${statusClass}">${usuario.estado}</span>
                         </div>
                     </div>
                 </div>
@@ -300,6 +314,20 @@ function cargarModalUsuario (usuario, contenedor) {
         }
     })
 
+    const cerrarSesion = document.querySelector(".cerrar-sesion")
+
+    cerrarSesion.addEventListener("click", () => {
+        sessionStorage.clear
+        loginHeader.classList.remove("hide");
+        userContainerHeader.classList.add("header__user--justify");
+        userIconsHeader.classList.add("hide");
+        userInfoHeader.classList.add("hide");
+        main.classList.add("main--justify-center");
+        contenedorDeCards.classList.add("hide");
+        infoMain.classList.add("hide")
+        inputsContainerMain.classList.add("hide")
+        mainModalBienvenida.classList.remove("hide")
+    })
 
     inicializarUsuarios();
 })

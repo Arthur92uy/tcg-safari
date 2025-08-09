@@ -323,14 +323,12 @@ p {
     flex-direction: row;
 }
 
-.card__user-rol, .card__user-status {
+.card__user-rol, .card__user-status, .administrador, .inactivo, .manager, .usuario, .activo {
     font-weight: 500;
     padding: 4px 8px;
     border-radius: 15px;
     font-size: 12px;
     align-items: center;
-    background-color: aquamarine;
-    color: #333;
 }
 
 .administrador, .inactivo {
@@ -568,6 +566,10 @@ p {
     flex-direction: column;
     align-items: left;
     margin-left: 12px;
+}
+
+.modal-usuario__container-text p, .modal-usuario__container-text span{
+    margin: 5px 0 0 0;
 }
 
 .modal-usuario__container-img {
