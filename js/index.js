@@ -30,8 +30,22 @@ document.addEventListener("DOMContentLoaded", function() {
         for (let i=0; i < usuariosLocal.length; i++){
             if(usuariosLocal[i].eliminado === false) {
                 let usuario = usuariosLocal[i]
-                contenedor.innerHTML += `
-                <div class="main__cards">
+                let rolClass
+                let statusClass
+                if(usuario.rol === "Administrador") {
+                    rolClass="administrador"
+                } else if (usuario.rol === "Manager") {
+                    rolClass="manager"
+                } else {
+                    rolClass="usuario"
+                }
+                if(usuario.estado === "Activo") {
+                    statusClass="activo"
+                } else {
+                    statusClass="inactivo"
+                }
+                contenedor.innerHTML += 
+                `<div class="main__cards">
                     <div class="card__options">
                         <div class="card__initials">CL</div>
                         <div class="card__icons">
@@ -48,26 +62,15 @@ document.addEventListener("DOMContentLoaded", function() {
                     </div>
                     <h3 class="card__user-name">${usuario.nombre} ${usuario.apellido}</h3>
                     <p class="card__user-mail">${usuario.email}</p>
-                    <div class="card__user-info">`
-                    if(usuario.rol === "Administrador") {
-                        contenedor.innerHTML+= `<span class="card__user-rol administrador">${usuario.rol}</span>`
-                    } else if (usuario.rol === "Manager") {
-                        contenedor.innerHTML+= `<span class="card__user-rol manager">${usuario.rol}</span>`
-                    } else {
-                        contenedor.innerHTML+= `<span class="card__user-rol usuario">${usuario.rol}</span>`
-                    }
-                    if(usuario.estado === "Activo") {
-                        `<span class="card__user-status activo">${usuario.estado}</span>`
-                    } else {
-                        `<span class="card__user-status inactivo">${usuario.estado}</span>`
-                    }
-                    contenedor.innerHTML+=`</div>
+                    <div class="card__user-info">
+                        <span class="card__user-rol ${rolClass}">${usuario.rol}</span>
+                        <span class="card__user-status ${statusClass}">${usuario.estado}</span>
+                    </div>
                     <div class="card__user-dates">
                         <p class="card__user-create">Creado: ${usuario.fechaCreacion}</p>
                         <p class="card__user-last-access">Ultimo acceso: ${usuario.ultimoAcceso}</p>
                     </div>
                 </div>`
-                    
             }
         }
     }
@@ -81,6 +84,13 @@ document.addEventListener("DOMContentLoaded", function() {
         if (nombre && usuario.nombre && usuario.apellido && usuario.rol) {
             nombre.innerText = usuario.nombre + " " + usuario.apellido;
             rol.innerText = usuario.rol
+            if(usuario.rol === "Administrador") {
+                rol.classList.add("administrador")
+            } else if (usuario.rol === "Manager") {
+                rol.classList.add("manager")
+            } else {
+                rol.classList.add("usuario")
+            }
         } else {
             console.log("No se cargo un usuario activo")
         }
@@ -144,17 +154,6 @@ document.addEventListener("DOMContentLoaded", function() {
     }
     if(usuarioEncontrado.clave === pass.value.trim()){
         sessionStorage.setItem('usuarioActivo', JSON.stringify(usuarioEncontrado));
-        mainModalLogin.classList.add("hide");
-        loginHeader.classList.add("hide");
-        userContainerHeader.classList.remove("header__user--justify");
-        userIconsHeader.classList.remove("hide");
-        userInfoHeader.classList.remove("hide");
-        cargarUsuariosEnCards(contenedorDeCards);
-        main.classList.remove("main--justify-center");
-        contenedorDeCards.classList.remove("hide");
-        infoMain.classList.remove("hide")
-        inputsContainerMain.classList.remove("hide")
-        console.log("Carga exitosa");
         return true;
     } else {
         console.log("error en contrasena");
@@ -165,12 +164,23 @@ document.addEventListener("DOMContentLoaded", function() {
     IniciarSesionLogin.addEventListener("submit", function(event){
         event.preventDefault();
         if(validarConstraseñaMail(emailLogin, contraseñaLogin)) {
-            iniciarSesion(emailLogin, contraseñaLogin);
+            if(iniciarSesion(emailLogin, contraseñaLogin)){
+                mainModalLogin.classList.add("hide");
+                loginHeader.classList.add("hide");
+                actualizarAvatarCuenta();
+                userContainerHeader.classList.remove("header__user--justify");
+                userIconsHeader.classList.remove("hide");
+                userInfoHeader.classList.remove("hide");
+                cargarUsuariosEnCards(contenedorDeCards);
+                main.classList.remove("main--justify-center");
+                contenedorDeCards.classList.remove("hide");
+                infoMain.classList.remove("hide")
+                inputsContainerMain.classList.remove("hide")
+            }
         } else {
             console.log("error");
         }
     })
 
     inicializarUsuarios();
-    actualizarAvatarCuenta();
 })

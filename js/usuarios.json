@@ -27,7 +27,7 @@
         "id": 3,
         "nombre": "Sofía",
         "apellido": "Gómez",
-        "rol": "Usuario",
+        "rol": "Manager",
         "estado": "Activo",
         "fechaCreacion": "10/03/2025 09:00:00",
         "ultimoAcceso": "07/08/2025 12:30:00",
