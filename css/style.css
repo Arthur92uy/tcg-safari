@@ -160,6 +160,7 @@ p {
     width: 36px;
     height: 36px;
     padding: 5px;
+    cursor: pointer;
 }
 
 .main {
@@ -200,6 +201,7 @@ p {
     justify-content: center;
     padding: 0.8rem 1.6rem;
     height: 40px;
+    cursor: pointer;
 }
 
 .main__modal-button {
