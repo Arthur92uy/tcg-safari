@@ -14,19 +14,17 @@ document.addEventListener("DOMContentLoaded", function() {
                 const res = await fetch(URL_JSON);
                 const data = await res.json();
                 localStorage.setItem('usuarios', JSON.stringify(data));
-                console.log('Usuarios iniciales cargados en localstorage');
             } catch(error){
             console.error('Error al cargar usuarios', error);
             }
-        } else {
-            console.log('Usuarios ya existen en localsorage')
         }
     }
     // --------------------------------------------------------------------------- //
 
     function cargarUsuariosEnCards(contenedor){
         const usuariosLocal = JSON.parse(localStorage.getItem('usuarios'))
-
+        const cantidadUsuarios = document.querySelector(".main__info div p span")
+        cantidadUsuarios.innerText= usuariosLocal.filter(u => u.eliminado === "false").length
         for (let i=0; i < usuariosLocal.length; i++){
             if(usuariosLocal[i].eliminado === false) {
                 let usuario = usuariosLocal[i]
@@ -47,7 +45,9 @@ document.addEventListener("DOMContentLoaded", function() {
                 contenedor.innerHTML += 
                 `<div class="main__cards">
                     <div class="card__options">
-                        <div class="card__initials">CL</div>
+                        <div class="card__initials">
+                            <span>${usuario.nombre[0]}${usuario.apellido[0]}</span>
+                        </div>
                         <div class="card__icons">
                             <button type="button" title="ver">
                                 <img src="./img/ojo.png" alt="">
@@ -79,10 +79,12 @@ document.addEventListener("DOMContentLoaded", function() {
     function actualizarAvatarCuenta() {
         const nombre = document.querySelector(".header__user-info p");
         const rol = document.querySelector(".header__user-subtitle")
+        const inicialesHeader = document.querySelector(".initials")
         const usuario = JSON.parse(sessionStorage.getItem("usuarioActivo")) || {};
 
         if (nombre && usuario.nombre && usuario.apellido && usuario.rol) {
             nombre.innerText = usuario.nombre + " " + usuario.apellido;
+            inicialesHeader.innerText = `${usuario.nombre[0]}` + `${usuario.apellido[0]}`
             rol.innerText = usuario.rol
             if(usuario.rol === "Administrador") {
                 rol.classList.add("administrador")

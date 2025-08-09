@@ -98,6 +98,7 @@ p {
     justify-content: flex-end;
     align-items: center;
     flex-direction: column;
+    width: 140px;
 }
 
 .header__user-info p{
@@ -119,7 +120,9 @@ p {
 .header__user-rol {
     display: flex;
     flex-direction: row;
+    justify-content: flex-end;
     padding: 5px;
+    width: 100%;
 }
 
 .header__user-rol img {
@@ -183,7 +186,7 @@ p {
     justify-content:space-between ;
 }
 
-.main__info div p {
+.main__info div {
     margin-top: 4px;
 }
 
