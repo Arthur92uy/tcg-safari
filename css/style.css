@@ -363,7 +363,6 @@ p {
     background-color: transparent;
     cursor: pointer;
     display: inline-flex;
-    border: 1px solid;
 }
 
 .card__icons button img {
