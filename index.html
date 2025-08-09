@@ -26,24 +26,19 @@
                     </div>
                 </div>
                 <div class="header__user-icons hide">
-                    <span class="initials">
-                        US
-                    </span>
+                    <span class="initials"></span>
                     <img src="./img/avatar-de-usuarios.png" alt="Logo de Avatar" class="header__user-img">
                     <img src="./img/cerrar-sesion.png" alt="Icono de cerrar sesion" class="header__user-img">
                 </div>
                 <div class="header__login">
                     <button type="button" class="header__button login">
-                    <span>Iniciar sesión</span>
+                        <span>Iniciar sesión</span>
                     </button>
                 </div>
-
             </div>
-
         </nav>
     </header>
     <main class="main main--justify-center">
-
         <div class="main__modal-bienvenida">
             <div>
                 <div>
@@ -57,7 +52,6 @@
                 <span>Iniciar Sesión</span>
             </button>
         </div>
-
         <div class="main__modal-login hide">
             <div class="main__modal-login__container">
                 <div>
@@ -67,11 +61,11 @@
                 <form name="login">
                     <div>
                         <img src="" alt="">
-                        <input type="email" title="Email" placeholder="usuario@empresa.com" class="email-login" name="email" autocomplete="email">
+                        <input type="email" title="Email" placeholder="usuario@empresa.com" class="email-login" name="email" autocomplete="email" value="sofia.gomez@example.com">
                     </div>
                     <div>
                         <img src="" alt="">
-                        <input type="password" title="Contraseña" placeholder="Contraseña" class="contraseña-login" name="contrasena">
+                        <input type="password" title="Contraseña" placeholder="Contraseña" class="contraseña-login" name="contrasena" value="Sofia789#">
                     </div>
                     <div class="main__modal-login__buttons">
                         <button type="reset" class="main__modal-button cancelar">
@@ -83,9 +77,10 @@
                     </div>
                 </form>
             </div>
-
         </div>
-
+        <div class="main__modal-usuario hide">
+            
+        </div>
         <div class="main__info hide">
             <div>
                 <h2>Usuarios</h2>
@@ -114,14 +109,11 @@
                     <option value="inactivo">Inactivo</option>
                 </select>
             </div>
-
         </div>
         <div class="main__container__cards hide">
-
         </div>
     </main>
     <footer class="footer">
-
     </footer>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/validator/13.15.15/validator.min.js"></script>
     <script src="./js/index.js" defer type="module"></script>
