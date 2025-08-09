@@ -24,7 +24,7 @@ document.addEventListener("DOMContentLoaded", function() {
     function cargarUsuariosEnCards(contenedor){
         const usuariosLocal = JSON.parse(localStorage.getItem('usuarios'))
         const cantidadUsuarios = document.querySelector(".main__info div p span")
-        cantidadUsuarios.innerText= usuariosLocal.filter(u => u.eliminado === "false").length
+        cantidadUsuarios.innerText= `${usuariosLocal.filter(u => u.eliminado === false).length}`
         for (let i=0; i < usuariosLocal.length; i++){
             if(usuariosLocal[i].eliminado === false) {
                 let usuario = usuariosLocal[i]
