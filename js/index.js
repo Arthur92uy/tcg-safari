@@ -289,7 +289,12 @@ function cargarModalUsuario (usuario, contenedor) {
                 mainModalUsuario.classList.add("hide")
         }
     })
+    mainModalUsuario.addEventListener("click", function(e) {
+        if(e.target.closest(".main__modal-button.cancelar")){
 
+                mainModalUsuario.classList.add("hide")
+        }
+    })
 
 
     inicializarUsuarios();
