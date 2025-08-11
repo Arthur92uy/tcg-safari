@@ -346,8 +346,7 @@ function cargarModalUsuario (usuario, contenedor) {
 
             if (usuario) {
                 cargarModalUsuarioEditar(usuario)
-                mainModalUsuarioEditar.classList.remove("hide")
-                overlay.classList.remove("hide")
+                
             }
         }
     })
@@ -359,6 +358,19 @@ function cargarModalUsuario (usuario, contenedor) {
         inputEmailUsuario.value = usuario.email
         selectEstadoeUsuario.value = usuario.estado
         selectRolUsuario.value = usuario.rol
+        mainModalUsuarioEditar.setAttribute("data-id",usuario.id)
+        // inputNombreUsuario.disabled = true
+        // inputNombreUsuario.style.opacity = 0.7
+        // inputApellidoUsuario.disabled = true
+        // inputEmailUsuario.disabled = true
+        // inputApellidoUsuario.style.opacity = 0.7
+        // inputEmailUsuario.style.opacity = 0.7
+        // selectEstadoeUsuario.disabled = true
+        // selectRolUsuario.disabled = true
+        mainModalUsuarioEditar.classList.remove("hide")
+        overlay.classList.remove("hide")
+
+
     }
 
     mainModalUsuarioEditar.addEventListener("click", function(e) {
@@ -377,6 +389,29 @@ function cargarModalUsuario (usuario, contenedor) {
         }
     })
 
+    mainModalUsuarioEditar.addEventListener("click", function(e) {
+        e.preventDefault()
+        if(e.target.closest(".main__modal-button-editar.guardar")){
+
+            // mainModalUsuarioEditar.classList.add("hide")
+            // overlay.classList.add("hide")
+            const usuarios = JSON.parse(localStorage.getItem("usuarios")) || [];
+            const usuario = usuarios.find(u => u.id === parseInt(mainModalUsuarioEditar.getAttribute("data-id")));
+            modificarDatosUsuario(usuario, inputNombreUsuario, inputApellidoUsuario, inputEmailUsuario, selectRolUsuario, selectEstadoeUsuario)
+        }
+    })
+
+    function modificarDatosUsuario (usuario, nombreNuevo, apellidoNuevo, mailNuevo, rolNuevo, estadoNuevo) {
+        const usuarios = JSON.parse(localStorage.getItem("usuarios")) || [];
+        const usuariosActualizados = usuarios.map( u => {
+            if (u.id == usuario.id) {
+                return {... u, nombre: nombreNuevo.value, apellido: apellidoNuevo.value, email: mailNuevo.value, rol: rolNuevo.value, estado: estadoNuevo.value}
+            } else {return u}
+        })
+        if (usuario.nombre != nombreNuevo.value.trim) {
+            localStorage.setItem("usuarios",JSON.stringify(usuariosActualizados))
+        }
+    }
 
 
 
