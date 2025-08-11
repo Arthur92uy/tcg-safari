@@ -329,5 +329,57 @@ function cargarModalUsuario (usuario, contenedor) {
         mainModalBienvenida.classList.remove("hide")
     })
 
+    const inputNombreUsuario = document.querySelector("#nombre")
+    const inputApellidoUsuario = document.querySelector("#apellido")
+    const inputEmailUsuario = document.querySelector("#email")
+    const selectEstadoeUsuario = document.querySelector("#estado")
+    const selectRolUsuario = document.querySelector("#rol")
+    const mainModalUsuarioEditar = document.querySelector(".main__modal-editar")
+
+
+    contenedorDeCards.addEventListener("click", function(e) {
+        if(e.target.closest("#editar-usuario")){
+            const card = e.target.closest(".main__card");
+            const idUsuario = card.getAttribute("data-id")
+            const usuarios = JSON.parse(localStorage.getItem("usuarios")) || [];
+            const usuario = usuarios.find(u => u.id === parseInt(idUsuario));
+
+            if (usuario) {
+                cargarModalUsuarioEditar(usuario)
+                mainModalUsuarioEditar.classList.remove("hide")
+                overlay.classList.remove("hide")
+            }
+        }
+    })
+
+    function cargarModalUsuarioEditar(usuario) {
+
+        inputNombreUsuario.value = usuario.nombre
+        inputApellidoUsuario.value = usuario.apellido
+        inputEmailUsuario.value = usuario.email
+        selectEstadoeUsuario.option = usuario.estado
+        selectRolUsuario.option = usuario.rol
+    }
+
+    mainModalUsuario.addEventListener("click", function(e) {
+        if(e.target.closest(".main__modal-usuario__icons.cancelar")){
+
+            mainModalUsuario.classList.add("hide")
+            overlay.classList.add("hide")
+        }
+    })
+
+    mainModalUsuarioEditar.addEventListener("click", function(e) {
+        if(e.target.closest(".main__modal-button-editar.cerrar")){
+
+            mainModalUsuarioEditar.classList.add("hide")
+            overlay.classList.add("hide")
+        }
+    })
+
+
+
+
+
     inicializarUsuarios();
 })

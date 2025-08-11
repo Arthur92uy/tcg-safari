@@ -191,7 +191,7 @@ p {
     margin-top: 4px;
 }
 
-.main__button, .header__button, .main__modal-button {
+.main__button, .header__button, .main__modal-button, .main__modal-button-editar {
     border-radius: 10px;
     background-color: #3B82F6;
     color:#FFF;
@@ -208,12 +208,24 @@ p {
     width: 100%;
 }
 
+.main__modal-button__container.editar {
+    justify-content: space-between;
+    align-items: center;
+
+}
+
+.main__modal-button-editar.cerrar, .main__modal-button-editar.guardar {
+    width: 180px;
+    align-items: center;
+    justify-content: center;
+}
+
 .main__button img {
     width: 24px;
     height: 24px;
 }
 
-.main__container-inputs {
+.main__container-inputs, .main__container__inputs-editar {
     padding: 1.6rem;
     margin-top: 2.4rem;
     background-color: #333;
@@ -261,7 +273,7 @@ p {
     font-size: 1.6rem;
 }
 
-.main__container__filter-roles, .main__container__filter-estados {
+.main__container__filter-roles, .main__container__filter-estados, .main__container__inputs-editar {
     border-radius: 10px;
     background-color: #333;
     color:#FFF;
@@ -376,7 +388,7 @@ p {
 }
 
 
-.main__modal-bienvenida, .main__modal-login, .main__modal-usuario {
+.main__modal-bienvenida, .main__modal-login, .main__modal-usuario, .main__modal-editar {
     background-color: #333;
     border-style: solid;
     border-radius: 10px;
@@ -420,7 +432,7 @@ p {
     margin: 0;
 }
 
-.main__modal-bienvenida div, .main__modal-login div {
+.main__modal-bienvenida div, .main__modal-login div, .main__modal-editar form {
     margin-bottom: 24px;
     display: flex;
     flex-direction: column;
@@ -487,10 +499,26 @@ p {
     width: 100%;
 }
 
-.main__modal-usuario {
+.main__modal-usuario, .main__modal-editar {
     width: 500px;
     z-index: 20;
     position: fixed;
+
+}
+
+.main__modal-editar .main__modal__form-editar, .main__modal__form-editar div {
+    width: 100%;
+}
+
+.main__modal__form-editar div {
+    padding-top: 16px;
+    align-items: flex-start;
+    text-align: left;
+}
+
+.main__modal__form-editar div label {
+    font-size: 16px;
+    width: 100%;
 
 }
 
@@ -541,6 +569,22 @@ p {
     padding-top: 16px;
 }
 
+
+
+.main__modal-button__container.editar, .main__container__filters.editar {
+    display: flex;
+    flex-direction: row;
+}
+
+.main__container__filters.editar {
+    flex-direction: column;
+    width: 100%;
+}
+
+.main__container__filters.editar select {
+    width: 100%;
+}
+
 .main__modal-usuario__info-personal, .main__modal-usuario__permisos-estado, .main__modal-usuario__actividad {
     padding-top: 16px;
     border-top: solid 0.5px;
@@ -588,5 +632,8 @@ p {
     width: 100vw;
     height: 100vh;
     background-color: rgba(0, 0, 0, 0.5);
-    z-index: 10;
+}
+
+input.main__container__inputs-editar {
+    margin-top: 16px;
 }
