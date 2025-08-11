@@ -357,14 +357,14 @@ function cargarModalUsuario (usuario, contenedor) {
         inputNombreUsuario.value = usuario.nombre
         inputApellidoUsuario.value = usuario.apellido
         inputEmailUsuario.value = usuario.email
-        selectEstadoeUsuario.option = usuario.estado
-        selectRolUsuario.option = usuario.rol
+        selectEstadoeUsuario.value = usuario.estado
+        selectRolUsuario.value = usuario.rol
     }
 
-    mainModalUsuario.addEventListener("click", function(e) {
+    mainModalUsuarioEditar.addEventListener("click", function(e) {
         if(e.target.closest(".main__modal-usuario__icons.cancelar")){
 
-            mainModalUsuario.classList.add("hide")
+            mainModalUsuarioEditar.classList.add("hide")
             overlay.classList.add("hide")
         }
     })
