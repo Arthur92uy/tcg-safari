@@ -637,3 +637,37 @@ p {
 input.main__container__inputs-editar {
     margin-top: 16px;
 }
+
+.notyf__toast--custom {
+    font-size: 18px;
+    text-align: center;
+    color: #FFF;
+    font-family: 'Roboto', sans-serif;
+}
+
+.swal2-popup {
+    background-color: #333;
+    font-family: 'Roboto', sans-serif;
+    color: #FFF;
+    border-radius: 10px;
+    border: solid;
+    font-size: 18px;
+}
+
+.swal2-confirm {
+    background-color: #991B1B;
+    font-family: 'Roboto', sans-serif;
+    color: #FFF;
+    border-radius: 10px;
+    border: solid;
+    font-size: 18px;
+}
+
+.swal2-cancel {
+    background-color: #333;
+    font-family: 'Roboto', sans-serif;
+    color: #FFF;
+    border-radius: 10px;
+    border: solid;
+    font-size: 16px;
+}

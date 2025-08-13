@@ -1,8 +1,21 @@
 
-
 document.addEventListener("DOMContentLoaded", function() {
 
     const URL_JSON = 'https://raw.githubusercontent.com/Arthur92uy/tcg-safari/refs/heads/main/js/usuarios.json'
+
+    const notyf = new Notyf({
+        duration: 3000,
+        ripple: true,
+        dismissible: false,
+        position: { x: 'center', y: 'bottom' },
+        types: [{
+                type: 'custom',
+                background: '#3B82F6',
+                icon: false,
+                className: 'notyf__toast--custom'
+            } 
+        ]
+    });
 
     const contenedorDeCards = document.querySelector(".main__container__cards")
     // --------------------------------------------------------------------------- //
@@ -25,6 +38,7 @@ document.addEventListener("DOMContentLoaded", function() {
         const usuariosLocal = JSON.parse(localStorage.getItem('usuarios'))
         const cantidadUsuarios = document.querySelector(".main__info div p span")
         cantidadUsuarios.innerText= `${usuariosLocal.filter(u => u.eliminado === false).length}`
+        contenedor.innerHTML =''
         for (let i=0; i < usuariosLocal.length; i++){
             if(usuariosLocal[i].eliminado === false) {
                 let usuario = usuariosLocal[i]
@@ -314,7 +328,7 @@ function cargarModalUsuario (usuario, contenedor) {
         }
     })
 
-    const cerrarSesion = document.querySelector(".cerrar-sesion")
+    const cerrarSesion = document.querySelector(".header__user-img.cerrar-sesion")
 
     cerrarSesion.addEventListener("click", () => {
         sessionStorage.clear
@@ -359,25 +373,16 @@ function cargarModalUsuario (usuario, contenedor) {
         selectEstadoeUsuario.value = usuario.estado
         selectRolUsuario.value = usuario.rol
         mainModalUsuarioEditar.setAttribute("data-id",usuario.id)
-        // inputNombreUsuario.disabled = true
-        // inputNombreUsuario.style.opacity = 0.7
-        // inputApellidoUsuario.disabled = true
-        // inputEmailUsuario.disabled = true
-        // inputApellidoUsuario.style.opacity = 0.7
-        // inputEmailUsuario.style.opacity = 0.7
-        // selectEstadoeUsuario.disabled = true
-        // selectRolUsuario.disabled = true
         mainModalUsuarioEditar.classList.remove("hide")
         overlay.classList.remove("hide")
-
 
     }
 
     mainModalUsuarioEditar.addEventListener("click", function(e) {
         if(e.target.closest(".main__modal-usuario__icons.cancelar")){
-
             mainModalUsuarioEditar.classList.add("hide")
             overlay.classList.add("hide")
+            cargarUsuariosEnCards(contenedorDeCards)
         }
     })
 
@@ -386,6 +391,7 @@ function cargarModalUsuario (usuario, contenedor) {
 
             mainModalUsuarioEditar.classList.add("hide")
             overlay.classList.add("hide")
+            cargarUsuariosEnCards(contenedorDeCards)
         }
     })
 
@@ -393,11 +399,11 @@ function cargarModalUsuario (usuario, contenedor) {
         e.preventDefault()
         if(e.target.closest(".main__modal-button-editar.guardar")){
 
-            // mainModalUsuarioEditar.classList.add("hide")
-            // overlay.classList.add("hide")
             const usuarios = JSON.parse(localStorage.getItem("usuarios")) || [];
             const usuario = usuarios.find(u => u.id === parseInt(mainModalUsuarioEditar.getAttribute("data-id")));
-            modificarDatosUsuario(usuario, inputNombreUsuario, inputApellidoUsuario, inputEmailUsuario, selectRolUsuario, selectEstadoeUsuario)
+            if(modificarDatosUsuario(usuario, inputNombreUsuario, inputApellidoUsuario, inputEmailUsuario, selectRolUsuario, selectEstadoeUsuario)) {
+                notyf.open({type: "custom", message: `Datos actualizados con éxito!`});
+            }
         }
     })
 
@@ -408,13 +414,47 @@ function cargarModalUsuario (usuario, contenedor) {
                 return {... u, nombre: nombreNuevo.value, apellido: apellidoNuevo.value, email: mailNuevo.value, rol: rolNuevo.value, estado: estadoNuevo.value}
             } else {return u}
         })
-        if (usuario.nombre != nombreNuevo.value.trim) {
-            localStorage.setItem("usuarios",JSON.stringify(usuariosActualizados))
-        }
+        localStorage.setItem("usuarios",JSON.stringify(usuariosActualizados))
+        cargarUsuariosEnCards(contenedorDeCards)
+        return true;
+    
     }
 
 
+    contenedorDeCards.addEventListener("click", function(e) {
+        if(e.target.closest("#eliminar-usuario")){
+            const card = e.target.closest(".main__card");
+            const idUsuario = card.getAttribute("data-id")
+            const usuarios = JSON.parse(localStorage.getItem("usuarios")) || [];
+            const usuario = usuarios.find(u => u.id === parseInt(idUsuario));
 
+            Swal.fire({
+                title: '¿Eliminar usuario?',
+                text: 'Esta acción no se puede deshacer',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonText: 'Sí, eliminar',
+                cancelButtonText: 'Cancelar'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        usuario.eliminado = true
+                        const usuariosActualizados = usuarios.map( u => {
+                            if (u.id == usuario.id) {
+                                return {... u, eliminado: usuario.eliminado}
+                            }else {
+                                return u
+                            }
+                        })
+                    localStorage.setItem("usuarios",JSON.stringify(usuariosActualizados))
+                    cargarUsuariosEnCards(contenedorDeCards)
+                    notyf.open({type: "custom", message: `Usuario eliminado con exito!`});
+                    return true;
+                }
+            });
+        }
+    })
 
     inicializarUsuarios();
-})
+
+    }
+)
