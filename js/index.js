@@ -167,14 +167,14 @@ document.addEventListener("DOMContentLoaded", function() {
     const usuarios = JSON.parse(localStorage.getItem('usuarios')) || []
     const usuarioEncontrado = usuarios.find(u => u.email === email.value.trim().toLowerCase());
     if(!usuarioEncontrado) {
-        console.log("error en email");
+        notyf.open({type: "custom", message: `El email es incorrecto!`});
         return false;
     }
     if(usuarioEncontrado.clave === pass.value.trim()){
         sessionStorage.setItem('usuarioActivo', JSON.stringify(usuarioEncontrado));
         return true;
     } else {
-        console.log("error en contrasena");
+        notyf.open({type: "custom", message: `La constraseña es incorrecta!`});
         return false;
     }
     }
@@ -196,7 +196,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 inputsContainerMain.classList.remove("hide")
             }
         } else {
-            console.log("error");
+            notyf.open({type: "custom", message: `Error al cargar usuarios!`});
         }
     })
     contenedorDeCards.addEventListener("click", function(e) {
@@ -454,105 +454,81 @@ function cargarModalUsuario (usuario, contenedor) {
         }
     })
 
+    const botonNuevoUsuario = document.querySelector(".main__button")
+    const mainModalUsuarioNuevo = document.querySelector(".main__modal-usuario-nuevo")
+    const iconoCerrarUsuarioNuevo = document.querySelector(".main__modal-usuario__icons.cancelar")
+    const buttonCerrarUsuarioNuevo = document.querySelector(".main__modal-button-nuevo.cerrar")
+    const buttonGuardarUsuarioNuevo = document.querySelector(".main__modal-button-nuevo.guardar")
 
-    function cargarModalUsuarioNuevo (contenedor) {
-        let usuarios = localStorage.getItem("usuarios") || []
-        let idNuevoUsuario = usuarios.length
+    const nombreNuevo = document.querySelector("#nombreNuevo");
+    const apellidoNuevo = document.querySelector("#apellidoNuevo");
+    const emailNuevo = document.querySelector("#emailNuevo");
+    const passwordNuevo = document.querySelector("#passwordNuevo");
+    const passwordNuevoCopia = document.querySelector("#passwordNuevoCopia")
+    const rolNuevo = document.querySelector("#rolNuevo");
+    const estadoNuevo = document.querySelector("#estadoNuevo");
 
 
+    botonNuevoUsuario.addEventListener("click", () => {
+        mainModalUsuarioNuevo.classList.remove("hide")
+        overlay.classList.remove("hide")
+    })
+    iconoCerrarUsuarioNuevo.addEventListener("click", () => {
+        mainModalUsuarioNuevo.classList.add("hide")
+        overlay.classList.add("hide")
+    })
+    buttonCerrarUsuarioNuevo.addEventListener("click", () => {
+        mainModalUsuarioNuevo.classList.add("hide")
+        overlay.classList.add("hide")
+    })
 
-    let rolClass
-    let statusClass
+    buttonGuardarUsuarioNuevo.addEventListener("click", function(e) {
+        e.preventDefault()
+        cargarUsuarioNuevo()
+    }) 
 
+    function cargarUsuarioNuevo () {
+        if(passwordNuevoCopia.value !== passwordNuevo.value) {
+            notyf.open({type: "custom", message: `Las contraseñas no coinciden.`})
+        } else {
+            if(!(validarConstraseñaMail(emailNuevo, passwordNuevo))){
+                notyf.open({type: "custom", message: `Formato incorrecto de email y/o contraseña!`});
+            } else {
+                const usuarios = JSON.parse(localStorage.getItem("usuarios") || [])
+                const idNuevoUsuario = usuarios.length
+                const nombre = nombreNuevo.value.trim()
+                const apellido = apellidoNuevo.value.trim()
+                const email = emailNuevo.value.toLowerCase().trim()
+                const password = passwordNuevo.value.trim()
+                const estado = estadoNuevo.value.trim()
+                const rol = rolNuevo.value.trim()
+                const ahora = dayjs().format('DD/MM/YYYY HH:mm:ss')
 
-    let usuarioNuevo = {
+                const objetoUsuarioNuevo = {
+                    id: idNuevoUsuario,
+                    nombre: nombre,
+                    apellido: apellido,
+                    rol: rol,
+                    estado: estado,
+                    fechaCreacion: ahora,
+                    ultimoAcceso: "00/00/0000 00:00:00",
+                    email: email,
+                    clave: password,
+                    eliminado: false
+                }
+                if(usuarios.push(objetoUsuarioNuevo)){
+                    localStorage.setItem("usuarios",JSON.stringify(usuarios))
+                    cargarUsuariosEnCards(contenedorDeCards)
+                    notyf.open({type: "custom", message: `Usuario creado con exito!`});
+
+                } else {
+                    notyf.open({type: "custom", message: `Error al guardar usuario nuevo!`});
+                }
+            }
+        }
+        
 
     }
-
-    contenedor.innerHTML = `
-        <div class="main__modal-usuario__portada">
-            <div class="main__modal-usuario__portada__titulo">
-                <h2>Detalle de Usuario</h2>
-                <img src="./img/cerrar.png" alt="Icono de cerrar" class="main__modal-usuario__icons cancelar">
-            </div>
-            <div class="main__modal-usuario__portada__presentacion">
-                <span class="initials initials--modal__usuario">${usuario.nombre[0]}${usuario.apellido[0]}</span>
-                <h3 class="modal__usuario-nombre">${usuario.nombre} ${usuario.apellido}</h3>
-                <p class="modal__usuario-mail__presentacion">${usuario.email}</p>
-            </div>
-            <div class="main__modal-usuario__detalles">
-                <div class="main__modal-usuario__info-personal">
-                    <h4>Informacion Personal</h4>
-                    <div class="modal-usuario__container">
-                        <div class="modal-usuario__container-img">
-                            <img src="./img/correo-electronico.png" alt="Icono de mail"class="main__modal-usuario__icons">
-                        </div>
-                        <div class="modal-usuario__container-text">
-                            <p>Email</p>
-                            <p>${usuario.email}</p>
-                        </div>
-                    </div>
-                    <div class="modal-usuario__container">
-                        <div class="modal-usuario__container-img">
-                            <img src="./img/usuario.png" alt="Icono de avatar"class="main__modal-usuario__icons">
-                        </div>
-                        <div class="modal-usuario__container-text">
-                            <p>Nombre Completo</p>
-                            <p>${usuario.nombre} ${usuario.apellido}</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="main__modal-usuario__permisos-estado">
-                    <h4>Permisos y Estado</h4>
-                    <div class="modal-usuario__container">
-                        <div class="modal-usuario__container-img">
-                            <img src="./img/blindaje.png" alt="Icono de escudo"class="main__modal-usuario__icons">
-                        </div>
-                        <div class="modal-usuario__container-text">
-                            <p>Rol</p>
-                            <span class="${rolClass}">${usuario.rol}</span>
-                        </div>
-                    </div>
-                    <div class="modal-usuario__container">
-                        <div class="modal-usuario__container-img">
-                            <img src="./img/onda-de-sonido.png" alt="Icono de senal"class="main__modal-usuario__icons">
-                        </div>
-                        <div class="modal-usuario__container-text">
-                            <p>Estado</p>
-                            <span class="${statusClass}">${usuario.estado}</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="main__modal-usuario__actividad">
-                    <h4>Informacion de Actividad</h4>
-                    <div class="modal-usuario__container">
-                        <div class="modal-usuario__container-img">
-                            <img src="./img/calendario.png" alt="Icono de calendario"class="main__modal-usuario__icons">
-                        </div>
-                        <div class="modal-usuario__container-text">
-                            <p>Fecha de Creacion</p>
-                            <p>${usuario.fechaCreacion}</p>
-                        </div>
-                    </div>
-                    <div class="modal-usuario__container">
-                        <div class="modal-usuario__container-img">
-                            <img src="./img/reloj.png" alt="Icono de relopj"class="main__modal-usuario__icons">
-                        </div>
-                        <div class="modal-usuario__container-text">
-                            <p>Fecha de ultimo acceso</p>
-                            <p>${usuario.ultimoAcceso}</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="main__modal-button__container">
-                <button type="reset" class="main__modal-button cancelar">
-                    Cerrar
-                </button>
-            </div>
-        </div>
-    `
-}
 
 
     inicializarUsuarios();

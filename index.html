@@ -42,7 +42,7 @@
         </nav>
     </header>
     <main class="main main--justify-center">
-        <div class="main__modal-bienvenida hide">
+        <div class="main__modal-bienvenida">
             <div>
                 <div>
                     <img src="./img/avatar-de-usuarios.png" alt="Logo de UserHub" class="main__logo-img">
@@ -82,7 +82,7 @@
             </div>
         </div>
 
-        <div class="main__modal-usuario-nuevo">
+        <div class="main__modal-usuario-nuevo hide">
             <form class="main__modal__form-nuevo" name="editar">
                 <div class="main__modal-usuario__portada__titulo">
                     <h2>Datos de nuevo usuario</h2>
@@ -122,10 +122,10 @@
                     </select>
                 </div>                
                 <div class="main__modal-button__container editar">
-                    <button type="button" class="main__modal-button-editar cerrar">
+                    <button type="button" class="main__modal-button-nuevo cerrar">
                         Cerrar
                     </button>
-                    <button type="submit" class="main__modal-button-editar guardar" data-id="">
+                    <button type="submit" class="main__modal-button-nuevo guardar" data-id="">
                         Guardar
                     </button>                    
                 </div>
@@ -211,6 +211,7 @@
     </main>
     <footer class="footer">
     </footer>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/dayjs/1.11.13/dayjs.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert2/11.22.3/sweetalert2.all.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/validator/13.15.15/validator.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.js"></script>

@@ -1,6 +1,6 @@
 [
     {
-        "id": 1,
+        "id": 0,
         "nombre": "Lucía",
         "apellido": "Fernández",
         "rol": "Administrador",
@@ -12,7 +12,7 @@
         "eliminado": false
     },
     {
-        "id": 2,
+        "id": 1,
         "nombre": "Mateo",
         "apellido": "Pérez",
         "rol": "Usuario",
@@ -24,7 +24,7 @@
         "eliminado": false
     },
     {
-        "id": 3,
+        "id": 2,
         "nombre": "Sofía",
         "apellido": "Gómez",
         "rol": "Manager",

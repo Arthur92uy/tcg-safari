@@ -191,7 +191,7 @@ p {
     margin-top: 4px;
 }
 
-.main__button, .header__button, .main__modal-button, .main__modal-button-editar {
+.main__button, .header__button, .main__modal-button, .main__modal-button-editar, .main__modal-button-nuevo {
     border-radius: 10px;
     background-color: #3B82F6;
     color:#FFF;
@@ -214,7 +214,7 @@ p {
 
 }
 
-.main__modal-button-editar.cerrar, .main__modal-button-editar.guardar {
+.main__modal-button-editar.cerrar, .main__modal-button-editar.guardar, .main__modal-button-nuevo.cerrar, .main__modal-button-nuevo.guardar {
     width: 180px;
     align-items: center;
     justify-content: center;
