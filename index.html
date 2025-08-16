@@ -6,7 +6,6 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert2/11.22.3/sweetalert2.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.css">
     <link rel="stylesheet" href="./css/style.css">
-    <link rel="icon" href="" type="image/png">
     <title>Gestion de usuarios</title>
 </head>
 <body>
@@ -43,7 +42,7 @@
         </nav>
     </header>
     <main class="main main--justify-center">
-        <div class="main__modal-bienvenida">
+        <div class="main__modal-bienvenida hide">
             <div>
                 <div>
                     <img src="./img/avatar-de-usuarios.png" alt="Logo de UserHub" class="main__logo-img">
@@ -82,6 +81,57 @@
                 </form>
             </div>
         </div>
+
+        <div class="main__modal-usuario-nuevo">
+            <form class="main__modal__form-nuevo" name="editar">
+                <div class="main__modal-usuario__portada__titulo">
+                    <h2>Datos de nuevo usuario</h2>
+                    <img src="./img/cerrar.png" alt="Icono de cerrar" class="main__modal-usuario__icons cancelar">
+                </div>
+                <div>
+                    <label for="nombreNuevo" title="nombre">Nombre</label>
+                    <input type="text" id="nombreNuevo" class="main__container__inputs-editar" required>
+                </div>
+                <div>
+                    <label for="apellidoNuevo" title="apellido">Apellido</label>
+                    <input type="text" id="apellidoNuevo" class="main__container__inputs-editar" required>
+                </div>
+                <div>
+                    <label for="emailNuevo" title="email">Correo electrónico</label>
+                    <input type="email" id="emailNuevo" class="main__container__inputs-editar" required>
+                </div>
+                <div>
+                    <label for="passwordNuevo" title="Password">Contraseña</label>
+                    <input type="password" id="passwordNuevo" class="main__container__inputs-editar" required>
+                </div>        
+                <div>
+                    <label for="passwordNuevoCopia" title="Password">Repetir contraseña</label>
+                    <input type="password" id="passwordNuevoCopia" class="main__container__inputs-editar" required>
+                </div>                           
+                <div class="main__container__filters editar">
+                    <label for="rolNuevo" title="Rol">Rol</label>
+                    <select title="Select rol" class="main__container__filter-roles" name="rol" id="rolNuevo">
+                        <option value="Administrador">Administrador</option>
+                        <option value="Manager">Manager</option>
+                        <option value="Usuario">Usuario</option>
+                    </select>
+                    <label for="estadoNuevo" title="Estado">Estado</label>
+                    <select title="Select estado" class="main__container__filter-estados editar" name="estado" id="estadoNuevo">
+                        <option value="Activo">Activo</option>
+                        <option value="Inactivo">Inactivo</option>
+                    </select>
+                </div>                
+                <div class="main__modal-button__container editar">
+                    <button type="button" class="main__modal-button-editar cerrar">
+                        Cerrar
+                    </button>
+                    <button type="submit" class="main__modal-button-editar guardar" data-id="">
+                        Guardar
+                    </button>                    
+                </div>
+            </form>
+        </div>
+
         <div class="main__modal-usuario hide">
             
         </div>

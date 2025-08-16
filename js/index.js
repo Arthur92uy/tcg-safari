@@ -454,6 +454,107 @@ function cargarModalUsuario (usuario, contenedor) {
         }
     })
 
+
+    function cargarModalUsuarioNuevo (contenedor) {
+        let usuarios = localStorage.getItem("usuarios") || []
+        let idNuevoUsuario = usuarios.length
+
+
+
+    let rolClass
+    let statusClass
+
+
+    let usuarioNuevo = {
+
+    }
+
+    contenedor.innerHTML = `
+        <div class="main__modal-usuario__portada">
+            <div class="main__modal-usuario__portada__titulo">
+                <h2>Detalle de Usuario</h2>
+                <img src="./img/cerrar.png" alt="Icono de cerrar" class="main__modal-usuario__icons cancelar">
+            </div>
+            <div class="main__modal-usuario__portada__presentacion">
+                <span class="initials initials--modal__usuario">${usuario.nombre[0]}${usuario.apellido[0]}</span>
+                <h3 class="modal__usuario-nombre">${usuario.nombre} ${usuario.apellido}</h3>
+                <p class="modal__usuario-mail__presentacion">${usuario.email}</p>
+            </div>
+            <div class="main__modal-usuario__detalles">
+                <div class="main__modal-usuario__info-personal">
+                    <h4>Informacion Personal</h4>
+                    <div class="modal-usuario__container">
+                        <div class="modal-usuario__container-img">
+                            <img src="./img/correo-electronico.png" alt="Icono de mail"class="main__modal-usuario__icons">
+                        </div>
+                        <div class="modal-usuario__container-text">
+                            <p>Email</p>
+                            <p>${usuario.email}</p>
+                        </div>
+                    </div>
+                    <div class="modal-usuario__container">
+                        <div class="modal-usuario__container-img">
+                            <img src="./img/usuario.png" alt="Icono de avatar"class="main__modal-usuario__icons">
+                        </div>
+                        <div class="modal-usuario__container-text">
+                            <p>Nombre Completo</p>
+                            <p>${usuario.nombre} ${usuario.apellido}</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="main__modal-usuario__permisos-estado">
+                    <h4>Permisos y Estado</h4>
+                    <div class="modal-usuario__container">
+                        <div class="modal-usuario__container-img">
+                            <img src="./img/blindaje.png" alt="Icono de escudo"class="main__modal-usuario__icons">
+                        </div>
+                        <div class="modal-usuario__container-text">
+                            <p>Rol</p>
+                            <span class="${rolClass}">${usuario.rol}</span>
+                        </div>
+                    </div>
+                    <div class="modal-usuario__container">
+                        <div class="modal-usuario__container-img">
+                            <img src="./img/onda-de-sonido.png" alt="Icono de senal"class="main__modal-usuario__icons">
+                        </div>
+                        <div class="modal-usuario__container-text">
+                            <p>Estado</p>
+                            <span class="${statusClass}">${usuario.estado}</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="main__modal-usuario__actividad">
+                    <h4>Informacion de Actividad</h4>
+                    <div class="modal-usuario__container">
+                        <div class="modal-usuario__container-img">
+                            <img src="./img/calendario.png" alt="Icono de calendario"class="main__modal-usuario__icons">
+                        </div>
+                        <div class="modal-usuario__container-text">
+                            <p>Fecha de Creacion</p>
+                            <p>${usuario.fechaCreacion}</p>
+                        </div>
+                    </div>
+                    <div class="modal-usuario__container">
+                        <div class="modal-usuario__container-img">
+                            <img src="./img/reloj.png" alt="Icono de relopj"class="main__modal-usuario__icons">
+                        </div>
+                        <div class="modal-usuario__container-text">
+                            <p>Fecha de ultimo acceso</p>
+                            <p>${usuario.ultimoAcceso}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="main__modal-button__container">
+                <button type="reset" class="main__modal-button cancelar">
+                    Cerrar
+                </button>
+            </div>
+        </div>
+    `
+}
+
+
     inicializarUsuarios();
 
     }

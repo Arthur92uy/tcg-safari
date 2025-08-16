@@ -388,7 +388,7 @@ p {
 }
 
 
-.main__modal-bienvenida, .main__modal-login, .main__modal-usuario, .main__modal-editar {
+.main__modal-bienvenida, .main__modal-login, .main__modal-usuario, .main__modal-editar, .main__modal-usuario-nuevo {
     background-color: #333;
     border-style: solid;
     border-radius: 10px;
@@ -432,7 +432,7 @@ p {
     margin: 0;
 }
 
-.main__modal-bienvenida div, .main__modal-login div, .main__modal-editar form {
+.main__modal-bienvenida div, .main__modal-login div, .main__modal-editar form, .main__modal-usuario-nuevo .main__modal__form-nuevo {
     margin-bottom: 24px;
     display: flex;
     flex-direction: column;
@@ -499,24 +499,27 @@ p {
     width: 100%;
 }
 
-.main__modal-usuario, .main__modal-editar {
+.main__modal-usuario, .main__modal-editar, .main__modal-usuario-nuevo {
     width: 500px;
     z-index: 20;
     position: fixed;
 
 }
 
-.main__modal-editar .main__modal__form-editar, .main__modal__form-editar div {
+.main__modal-editar .main__modal__form-editar, 
+.main__modal__form-editar div, 
+.main__modal-usuario-nuevo .main__modal__form-nuevo,
+.main__modal__form-nuevo div {
     width: 100%;
 }
 
-.main__modal__form-editar div {
+.main__modal__form-editar div, .main__modal__form-nuevo div {
     padding-top: 16px;
     align-items: flex-start;
     text-align: left;
 }
 
-.main__modal__form-editar div label {
+.main__modal__form-editar div label, .main__modal__form-nuevo div label {
     font-size: 16px;
     width: 100%;
 
