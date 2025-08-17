@@ -34,8 +34,8 @@ document.addEventListener("DOMContentLoaded", function() {
     }
     // --------------------------------------------------------------------------- //
 
-    function cargarUsuariosEnCards(contenedor){
-        const usuariosLocal = JSON.parse(localStorage.getItem('usuarios'))
+
+    function cargarUsuariosEnCards(contenedor, usuariosLocal){
         const cantidadUsuarios = document.querySelector(".main__info div p span")
         cantidadUsuarios.innerText= `${usuariosLocal.filter(u => u.eliminado === false).length}`
         contenedor.innerHTML =''
@@ -57,7 +57,7 @@ document.addEventListener("DOMContentLoaded", function() {
                     statusClass="inactivo"
                 }
                 contenedor.innerHTML += 
-                `<div class="main__card" data-id="${usuario.id}">
+                `<div class="main__card" data-id="${usuario.id}" >
                     <div class="card__options">
                         <div class="card__initials">
                             <span>${usuario.nombre[0]}${usuario.apellido[0]}</span>
@@ -89,28 +89,44 @@ document.addEventListener("DOMContentLoaded", function() {
         }
     }
     // --------------------------------------------------------------------------- //
-
-    function actualizarAvatarCuenta() {
-        const nombre = document.querySelector(".header__user-info p");
-        const rol = document.querySelector(".header__user-subtitle")
+        const nombreHeader = document.querySelector(".header__user-info p");
+        const rolHeader = document.querySelector(".header__user-subtitle")
         const inicialesHeader = document.querySelector(".initials")
+        function actualizarAvatarCuenta() {
+        
         const usuario = JSON.parse(sessionStorage.getItem("usuarioActivo")) || {};
+        const usuarios = JSON.parse(localStorage.getItem('usuarios')) || []
 
-        if (nombre && usuario.nombre && usuario.apellido && usuario.rol) {
-            nombre.innerText = usuario.nombre + " " + usuario.apellido;
+        if (nombreHeader && usuario.nombre && usuario.apellido && usuario.rol) {
+            nombreHeader.innerText = usuario.nombre + " " + usuario.apellido;
             inicialesHeader.innerText = `${usuario.nombre[0]}` + `${usuario.apellido[0]}`
-            rol.innerText = usuario.rol
+            rolHeader.innerText = usuario.rol
             if(usuario.rol === "Administrador") {
-                rol.classList.add("administrador")
+                rolHeader.classList.add("administrador")
+                botonNuevoUsuario.disabled=false;
+                
+
             } else if (usuario.rol === "Manager") {
-                rol.classList.add("manager")
+                rolHeader.classList.add("manager")
+                botonNuevoUsuario.disabled=false;
+
             } else {
-                rol.classList.add("usuario")
+                rolHeader.classList.add("usuario")
+                botonNuevoUsuario.disabled=true;
             }
+            const usuariosActualizados = usuarios.map( u => {
+            if (u.id == usuario.id) {
+                return {... u, ultimoAcceso: dayjs().format('DD/MM/YYYY HH:mm:ss')}
+            } else {return u}
+        })
+        localStorage.setItem("usuarios",JSON.stringify(usuariosActualizados))
+
         } else {
             console.log("No se cargo un usuario activo")
         }
     }
+
+
     // --------------------------------------------------------------------------- //
 
     const botonCancelarModal = document.querySelector(".main__modal-login__buttons .main__modal-button.cancelar");
@@ -181,6 +197,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
     IniciarSesionLogin.addEventListener("submit", function(event){
         event.preventDefault();
+        const usuarios = JSON.parse(localStorage.getItem('usuarios')) || []
         if(validarConstraseñaMail(emailLogin, contraseñaLogin)) {
             if(iniciarSesion(emailLogin, contraseñaLogin)){
                 mainModalLogin.classList.add("hide");
@@ -189,7 +206,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 userContainerHeader.classList.remove("header__user--justify");
                 userIconsHeader.classList.remove("hide");
                 userInfoHeader.classList.remove("hide");
-                cargarUsuariosEnCards(contenedorDeCards);
+                cargarUsuariosEnCards(contenedorDeCards, usuarios);
                 main.classList.remove("main--justify-center");
                 contenedorDeCards.classList.remove("hide");
                 infoMain.classList.remove("hide")
@@ -331,7 +348,11 @@ function cargarModalUsuario (usuario, contenedor) {
     const cerrarSesion = document.querySelector(".header__user-img.cerrar-sesion")
 
     cerrarSesion.addEventListener("click", () => {
+        const rol = document.querySelector(".header__user-subtitle")
         sessionStorage.clear
+        rol.classList.remove("administrador")
+        rol.classList.remove("manager")
+        rol.classList.remove("user")
         loginHeader.classList.remove("hide");
         userContainerHeader.classList.add("header__user--justify");
         userIconsHeader.classList.add("hide");
@@ -380,18 +401,19 @@ function cargarModalUsuario (usuario, contenedor) {
 
     mainModalUsuarioEditar.addEventListener("click", function(e) {
         if(e.target.closest(".main__modal-usuario__icons.cancelar")){
+            const usuarios = JSON.parse(localStorage.getItem('usuarios')) || []
             mainModalUsuarioEditar.classList.add("hide")
             overlay.classList.add("hide")
-            cargarUsuariosEnCards(contenedorDeCards)
+            cargarUsuariosEnCards(contenedorDeCards, usuarios)
         }
     })
 
     mainModalUsuarioEditar.addEventListener("click", function(e) {
         if(e.target.closest(".main__modal-button-editar.cerrar")){
-
+            const usuarios = JSON.parse(localStorage.getItem('usuarios')) || []
             mainModalUsuarioEditar.classList.add("hide")
             overlay.classList.add("hide")
-            cargarUsuariosEnCards(contenedorDeCards)
+            cargarUsuariosEnCards(contenedorDeCards, usuarios)
         }
     })
 
@@ -415,7 +437,8 @@ function cargarModalUsuario (usuario, contenedor) {
             } else {return u}
         })
         localStorage.setItem("usuarios",JSON.stringify(usuariosActualizados))
-        cargarUsuariosEnCards(contenedorDeCards)
+        usuarios = JSON.parse(localStorage.getItem("usuarios")) || [];
+        cargarUsuariosEnCards(contenedorDeCards, usuarios)
         return true;
     
     }
@@ -446,7 +469,8 @@ function cargarModalUsuario (usuario, contenedor) {
                             }
                         })
                     localStorage.setItem("usuarios",JSON.stringify(usuariosActualizados))
-                    cargarUsuariosEnCards(contenedorDeCards)
+                    usuarios = JSON.parse(localStorage.getItem("usuarios")) || [];
+                    cargarUsuariosEnCards(contenedorDeCards, usuarios)
                     notyf.open({type: "custom", message: `Usuario eliminado con exito!`});
                     return true;
                 }
@@ -484,21 +508,32 @@ function cargarModalUsuario (usuario, contenedor) {
 
     buttonGuardarUsuarioNuevo.addEventListener("click", function(e) {
         e.preventDefault()
-        cargarUsuarioNuevo()
+        if(cargarUsuarioNuevo()){
+            mainModalUsuarioNuevo.classList.add("hide")
+            overlay.classList.add("hide")
+        }
+        
     }) 
 
     function cargarUsuarioNuevo () {
         if(passwordNuevoCopia.value !== passwordNuevo.value) {
             notyf.open({type: "custom", message: `Las contraseñas no coinciden.`})
+            return false;
         } else {
             if(!(validarConstraseñaMail(emailNuevo, passwordNuevo))){
                 notyf.open({type: "custom", message: `Formato incorrecto de email y/o contraseña!`});
+                return false;
             } else {
+                const email = emailNuevo.value.toLowerCase().trim()
                 const usuarios = JSON.parse(localStorage.getItem("usuarios") || [])
+                const usuarioEncontrado = usuarios.find(u => u.email === email);
+                if(usuarioEncontrado) {
+                    notyf.open({type: "custom", message: `Ya existe un usuario asociado a ese Email!`});
+                    return false;
+                }
                 const idNuevoUsuario = usuarios.length
                 const nombre = nombreNuevo.value.trim()
                 const apellido = apellidoNuevo.value.trim()
-                const email = emailNuevo.value.toLowerCase().trim()
                 const password = passwordNuevo.value.trim()
                 const estado = estadoNuevo.value.trim()
                 const rol = rolNuevo.value.trim()
@@ -518,20 +553,44 @@ function cargarModalUsuario (usuario, contenedor) {
                 }
                 if(usuarios.push(objetoUsuarioNuevo)){
                     localStorage.setItem("usuarios",JSON.stringify(usuarios))
-                    cargarUsuariosEnCards(contenedorDeCards)
+                    usuarios = JSON.parse(localStorage.getItem("usuarios")) || [];
+                    cargarUsuariosEnCards(contenedorDeCards, usuarios)
                     notyf.open({type: "custom", message: `Usuario creado con exito!`});
-
+                    return true;
                 } else {
                     notyf.open({type: "custom", message: `Error al guardar usuario nuevo!`});
+                    return false;
                 }
             }
         }
-        
-
     }
 
 
-    inicializarUsuarios();
 
+    const buscador = document.querySelector(".search")
+    const filtroRol = document.querySelector(".main__container__filter-roles")
+    const filtroEstado = document.querySelector(".main__container__filter-estados")
+
+    function aplicarFiltros(){
+        const textoSearch = buscador.value.toLowerCase()
+        const rol = filtroRol.value
+        const estado = filtroEstado.value
+
+        const usuarios = JSON.parse(localStorage.getItem("usuarios"))
+        const coincidefiltros = usuarios.filter(u => {
+            const coincideTextoSearch = textoSearch === "" || (Object.values(u).some(valor => String(valor).toLowerCase().includes(textoSearch)))
+            const coincideRol = u.rol === rol || rol === ""
+            const coincideEstado = u.estado === estado || estado === ""
+            return coincideEstado && coincideRol && coincideTextoSearch
+        })
+
+        cargarUsuariosEnCards(contenedorDeCards, coincidefiltros)
+    }
+
+    filtroEstado.addEventListener("change", aplicarFiltros)
+    filtroRol.addEventListener("change", aplicarFiltros)
+    buscador.addEventListener("input", aplicarFiltros)
+
+    inicializarUsuarios();
     }
 )
